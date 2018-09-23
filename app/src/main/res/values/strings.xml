@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Australian Bird Tracker</string>
+    <string name="filter">Filter by category</string>
+    <string-array name="categories">
+        <item>All</item>
+        <item>Bird of Prey</item>
+        <item>Bush Bird</item>
+        <item>Parrot</item>
+        <item>Sea Bird</item>
+        <item>Water Bird</item>
+    </string-array>
+    <string name="trackings_list_name">Trackings List</string>
+    <string name="add_tracking">Add tracking</string>
+    <string name="trackable">Trackable</string>
+    <string name="tracking_title">Title</string>
+    <string name="meet_date">Date</string>
+    <string name="meet_time">Meet Time</string>
+    <string name="meet_location">Meet Location</string>
+    <string name="edit_tracking">Edit</string>
+    <string name="remove_tracking">Remove</string>
+    <string name="enter_title">Enter title</string>
+    <string name="save_tracking">Save</string>
+    <string name="select_trackable">Select trackable</string>
+    <string-array name="spinner_trackables">
+        <item>Australian Magpie</item>
+        <item>Kookaburra</item>
+        <item>Sulphur-Crested Cockatoo</item>
+    </string-array>
+    <string name="select_meet_date">Select meeting date/time</string>
+    <string-array name="meet_dates">
+        <item>05/07/2018 1:00:00 PM</item>
+        <item>05/07/2018 1:05:00 PM</item>
+        <item>05/07/2018 1:10:00 PM</item>
+        <item>05/07/2018 1:15:00 PM</item>
+        <item>05/07/2018 1:20:00 PM</item>
+        <item>05/07/2018 1:25:00 PM</item>
+        <item>05/07/2018 1:30:00 PM</item>
+        <item>05/07/2018 1:35:00 PM</item>
+        <item>05/07/2018 1:40:00 PM</item>
+        <item>05/07/2018 1:45:00 PM</item>
+        <item>05/07/2018 1:50:00 PM</item>
+        <item>05/07/2018 1:55:00 PM</item>
+    </string-array>
+
+</resources>

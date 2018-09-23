@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- from http://developer.android.com/resources/tutorials/views/hello-tablelayout.html -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/trackingItemTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1" >
+
+        <TableRow
+            android:id="@+id/trackableRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/trackableNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:text="@string/trackable"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+            <TextView
+                android:id="@+id/trackableNameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/titleRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:text="@string/tracking_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+            <TextView
+                android:id="@+id/titleValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/dateRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:text="@string/meet_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+            <TextView
+                android:id="@+id/dateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/locationRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/locationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:text="@string/meet_location"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+
+            <TextView
+                android:id="@+id/locationValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/table_padding"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tracking_item_text_size"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/editTracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_tracking"/>
+
+        <Button
+            android:id="@+id/removeTracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_tracking"/>
+    </LinearLayout>
+
+</LinearLayout>
+

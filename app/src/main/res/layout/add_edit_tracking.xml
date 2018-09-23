@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/enterTrackableName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_trackable"
+        android:textColor="@color/black"/>
+
+    <Spinner
+        android:id="@+id/trackableNameSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enterTrackableName" />
+
+    <TextView
+        android:id="@+id/enterTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/trackableNameSpinner"
+        android:text="@string/enter_title" />
+
+    <EditText
+        android:id="@+id/titleEntry"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterTitle"
+        android:background="@android:drawable/editbox_background"
+        android:inputType="text"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/enterMeetDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleEntry"
+        android:text="@string/select_meet_date" />
+
+    <Spinner
+        android:id="@+id/meetDateSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enterMeetDate"/>
+
+    <Button
+        android:id="@+id/saveTracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/meetDateSpinner"
+        android:text="@string/save_tracking" />
+
+</RelativeLayout>
