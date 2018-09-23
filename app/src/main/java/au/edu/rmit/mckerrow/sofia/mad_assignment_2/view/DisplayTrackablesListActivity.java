@@ -1,4 +1,4 @@
-package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
+package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.TrackableAdapter;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;

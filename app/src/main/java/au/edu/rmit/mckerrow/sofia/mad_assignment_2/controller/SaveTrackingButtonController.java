@@ -3,7 +3,6 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -15,6 +14,9 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
 
 public class SaveTrackingButtonController implements View.OnClickListener{
 
@@ -34,7 +36,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     // Add tracking to the trackings list when the Save button is clicked
     @Override
     public void onClick(View v) {
-        addTracking(activity);
+        updateTrackingList(activity);
 
         adapter = DisplayTrackingsListActivity.getAdapter();
         adapter.notifyDataSetChanged();
@@ -42,7 +44,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         mContext.startActivity(new Intent(mContext, TabWidgetActivity.class));
     }
 
-    public void addTracking(AddEditTrackingActivity activity) {
+    public void updateTrackingList(AddEditTrackingActivity activity) {
         trackingInfo = TrackingInfo.getSingletonInstance(mContext);
         trackingList = trackingInfo.getTrackingList();
 
@@ -50,7 +52,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
             trackingList = new ArrayList<BirdTracking>();
         }
 
-        String trackingID = "trng" + trackingList.size() + 1;
+        String trackingID = "tr" + trackingList.size() + 1;
 
         String trackableID = null;
         Spinner trackableSpinner = (Spinner) activity.findViewById(R.id.trackableNameSpinner);

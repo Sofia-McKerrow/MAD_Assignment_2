@@ -6,14 +6,13 @@ import android.view.View;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
 
-public class AddTrackingButtonController implements View.OnClickListener{
+public class EditTrackingButtonController implements View.OnClickListener{
     Context mContext;
 
-    public AddTrackingButtonController(Context mContext) {
+    public EditTrackingButtonController(Context mContext) {
         this.mContext = mContext;
     }
 
-    // Go to AddEditTracking activity when Add Tracking button is clicked
     @Override
     public void onClick(View v) {
         mContext.startActivity(new Intent(mContext, AddEditTrackingActivity.class));

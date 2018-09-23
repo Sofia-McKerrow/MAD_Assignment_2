@@ -2,24 +2,20 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
 
 public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHolder>{
     public static final String TRACKABLE_ID_KEY = "trackable_id_key";
@@ -134,7 +130,10 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
 
     // Edit selected tracking
     public void editTracking(int position) {
-
+        String title = trackingList.get(position).getTitle();
+        Intent intent = new Intent(mContext, AddEditTrackingActivity.class);
+        intent.putExtra("title", title);
+        mContext.startActivity(intent);
     }
 
     // Remove tracking from trackingList

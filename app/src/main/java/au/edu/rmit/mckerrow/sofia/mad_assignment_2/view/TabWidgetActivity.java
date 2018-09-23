@@ -1,10 +1,12 @@
-package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
+package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 
 public class TabWidgetActivity extends android.app.TabActivity {
 

@@ -1,7 +1,6 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -12,6 +11,7 @@ import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
 
 public class FilterController implements AdapterView.OnItemSelectedListener {
 
