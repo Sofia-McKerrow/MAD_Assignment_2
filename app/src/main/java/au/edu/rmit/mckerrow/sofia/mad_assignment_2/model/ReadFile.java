@@ -14,7 +14,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 
 public class ReadFile {
 
-    public static List<BirdTrackable> trackableList = new ArrayList<>();
+    public static ArrayList<BirdTrackable> trackableList = new ArrayList<>();
     public static Map<String, BirdTrackable> trackableMap = new HashMap<>();
     private static final String LOG_TAG = BirdTrackable.class.getName();
 
@@ -68,7 +68,7 @@ public class ReadFile {
         return trackableList;
     }
 
-    public static void setTrackableList(List<BirdTrackable> trackableList) {
+    public static void setTrackableList(ArrayList<BirdTrackable> trackableList) {
         ReadFile.trackableList = trackableList;
     }
 

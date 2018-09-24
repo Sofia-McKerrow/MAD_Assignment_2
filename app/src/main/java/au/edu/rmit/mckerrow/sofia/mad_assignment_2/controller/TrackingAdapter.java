@@ -66,6 +66,8 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
         private BirdTracking currentTracking;
         private int position;
 
+        public ItemClickListener itemClickListener;
+
         public View mView;
 
         public ViewHolder(View itemView) {
@@ -107,6 +109,10 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
             this.currentTracking = currentTracking;
         }
 
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
         public void setListeners() {
             editButton.setOnClickListener(ViewHolder.this);
             removeButton.setOnClickListener(ViewHolder.this);
@@ -114,6 +120,7 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
+//            this.itemClickListener.onItemClick(getLayoutPosition());
             switch (v.getId()) {
                 // If edit button is clicked
                 case R.id.editTracking:
@@ -133,6 +140,7 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
         String title = trackingList.get(position).getTitle();
         Intent intent = new Intent(mContext, AddEditTrackingActivity.class);
         intent.putExtra("title", title);
+        intent.putExtra("position", position);
         mContext.startActivity(intent);
     }
 

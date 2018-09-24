@@ -54,10 +54,10 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
         addTracking = (Button) findViewById(R.id.addTracking);
         addTracking.setOnClickListener(new AddTrackingButtonController(this));
 
-//        editTracking = (Button) findViewById(R.id.editTracking);
-//        if (editTracking != null) {
-//            editTracking.setOnClickListener(new EditTrackingButtonController(this));
-//        }
+        editTracking = (Button) findViewById(R.id.editTracking);
+        if (editTracking != null) {
+            editTracking.setOnClickListener(new EditTrackingButtonController(this));
+        }
     }
 
     public static TrackingAdapter getAdapter() {

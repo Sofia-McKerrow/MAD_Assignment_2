@@ -1,13 +1,18 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
@@ -37,8 +42,18 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
         if (trackableList != null) {
             trackableList.clear();
         }
+
         ReadFile.readTrackableFile(mContext);
         trackableList = ReadFile.getTrackableList();
+
+        // Remove duplicate entries from trackableList so only entries with an unique trackableID are in the list
+        // Prevents bug where entries display twice when one of the categories in the filter spinner is first selected
+        Map<Integer, BirdTrackable> map = new LinkedHashMap<Integer, BirdTrackable>();
+        for (BirdTrackable trackable : trackableList) {
+            map.put(trackable.getTrackableID(), trackable);
+        }
+        trackableList.clear();
+        trackableList.addAll(map.values());
 
         // Sort list alphabetically
         Collections.sort(trackableList, new Comparator<BirdTrackable>() {
@@ -51,14 +66,20 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
         switch (position) {
             // If All is selected
             case 0:
-               filteredList.addAll(trackableList);
-               adapter.notifyDataSetChanged();
-               break;
+                filteredList.addAll(trackableList);
+                adapter.notifyDataSetChanged();
+
+                break;
             case 1:
                 // If Bird of Prey category is selected
                 category = "Bird of Prey";
                 filteredList = filterTrackableList(trackableList, category);
                 adapter.notifyDataSetChanged();
+
+                Log.i("MyTag", "Bird of prey has been selected");
+//                for (int i = 0; i < trackableList.size(); i++) {
+//                    Log.i("MyTag", "TrackableList " + trackableList.get(i).getName());
+//                }
                 break;
 
             case 2:

@@ -15,6 +15,7 @@ public class AddEditTrackingActivity extends AppCompatActivity {
     private Button saveTracking;
     private EditText editTitle;
     private String title;
+    private static int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,4 +47,5 @@ public class AddEditTrackingActivity extends AppCompatActivity {
         arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         meetDateSpinner.setAdapter(arrayAdapter2);
     }
+
 }

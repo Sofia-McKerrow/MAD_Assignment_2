@@ -12,6 +12,7 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.CRUD;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
@@ -27,6 +28,8 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     private TrackingAdapter adapter;
     private AddEditTrackingActivity activity;
     private List<BirdTrackable> trackableList;
+    private int position;
+    private CRUD crud;
 
     public SaveTrackingButtonController(Context mContext, AddEditTrackingActivity activity) {
         this.mContext = mContext;
