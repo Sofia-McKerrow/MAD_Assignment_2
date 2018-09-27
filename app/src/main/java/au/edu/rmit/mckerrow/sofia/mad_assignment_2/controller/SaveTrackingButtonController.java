@@ -15,7 +15,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.CRUD;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
 
@@ -26,12 +26,12 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     private TrackingInfo trackingInfo;
     private BirdTracking tracking;
     private TrackingAdapter adapter;
-    private AddEditTrackingActivity activity;
+    private AddTrackingActivity activity;
     private List<BirdTrackable> trackableList;
     private int position;
     private CRUD crud;
 
-    public SaveTrackingButtonController(Context mContext, AddEditTrackingActivity activity) {
+    public SaveTrackingButtonController(Context mContext, AddTrackingActivity activity) {
         this.mContext = mContext;
         this.activity = activity;
     }
@@ -47,7 +47,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         mContext.startActivity(new Intent(mContext, TabWidgetActivity.class));
     }
 
-    public void updateTrackingList(AddEditTrackingActivity activity) {
+    public void updateTrackingList(AddTrackingActivity activity) {
         trackingInfo = TrackingInfo.getSingletonInstance(mContext);
         trackingList = trackingInfo.getTrackingList();
 
@@ -90,7 +90,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         trackingInfo.setTrackingList(trackingList);
     }
 
-    public void editTracking(AddEditTrackingActivity activity) {
+    public void editTracking(AddTrackingActivity activity) {
         String trackingID = activity.getIntent().getExtras().getString(TrackingAdapter.TRACKING_ID_KEY);
     }
 }

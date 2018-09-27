@@ -15,7 +15,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
 
 public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHolder>{
     public static final String TRACKABLE_ID_KEY = "trackable_id_key";
@@ -138,7 +138,7 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
     // Edit selected tracking
     public void editTracking(int position) {
         String title = trackingList.get(position).getTitle();
-        Intent intent = new Intent(mContext, AddEditTrackingActivity.class);
+        Intent intent = new Intent(mContext, AddTrackingActivity.class);
         intent.putExtra("title", title);
         intent.putExtra("position", position);
         mContext.startActivity(intent);

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DisplayTrackablesListActivity"></activity>
+        <activity android:name=".view.DisplayTrackablesListActivity" />
         <activity
             android:name=".view.DisplayTrackableRouteInfoActivity"
             android:parentActivityName=".view.DisplayTrackablesListActivity">
@@ -17,7 +17,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.DisplayTrackablesListActivity" />
         </activity>
-        <activity android:name=".view.DisplayTrackingsListActivity"></activity>
+        <activity android:name=".view.DisplayTrackingsListActivity" />
         <activity
             android:name=".view.TabWidgetActivity"
             android:theme="@style/TabWidgetTheme">
@@ -27,7 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AddEditTrackingActivity">
+        <activity android:name=".view.AddTrackingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.DisplayTrackingsListActivity" />
+        </activity>
+        <activity android:name=".view.EditTrackingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.DisplayTrackingsListActivity" />

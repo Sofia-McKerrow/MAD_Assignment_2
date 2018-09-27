@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/editTrackableName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_trackable"
+        android:textColor="@color/black"/>
+
+    <Spinner
+        android:id="@+id/editTrackableNameSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTrackableName" />
+
+    <TextView
+        android:id="@+id/editTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTrackableNameSpinner"
+        android:text="@string/enter_title"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editTitleEntry"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTitle"
+        android:background="@android:drawable/editbox_background"
+        android:inputType="text"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/editMeetDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTitleEntry"
+        android:text="@string/select_meet_date"
+        android:textColor="@color/black"/>
+
+    <Spinner
+        android:id="@+id/editMeetDateSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editMeetDate" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/updateTracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_tracking" />
+
+        <Button
+            android:id="@+id/removeTracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_tracking" />
+    </LinearLayout>
+</RelativeLayout>
+
+
+

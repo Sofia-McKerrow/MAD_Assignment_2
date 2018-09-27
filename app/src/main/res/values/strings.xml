@@ -20,6 +20,7 @@
     <string name="remove_tracking">Remove</string>
     <string name="enter_title">Enter title</string>
     <string name="save_tracking">Save</string>
+    <string name="update_tracking">Update</string>
     <string name="select_trackable">Select trackable</string>
     <string-array name="spinner_trackables">
         <item>Australian Magpie</item>
@@ -41,5 +42,6 @@
         <item>05/07/2018 1:50:00 PM</item>
         <item>05/07/2018 1:55:00 PM</item>
     </string-array>
+    <string name="title_activity_edit_tracking">EditTrackingActivity</string>
 
 </resources>

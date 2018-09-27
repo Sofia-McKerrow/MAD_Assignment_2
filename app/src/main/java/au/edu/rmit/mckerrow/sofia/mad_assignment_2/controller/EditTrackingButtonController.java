@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddEditTrackingActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.EditTrackingActivity;
 
 public class EditTrackingButtonController implements View.OnClickListener{
     Context mContext;
@@ -15,6 +15,6 @@ public class EditTrackingButtonController implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        mContext.startActivity(new Intent(mContext, AddEditTrackingActivity.class));
+        mContext.startActivity(new Intent(mContext, EditTrackingActivity.class));
     }
 }
