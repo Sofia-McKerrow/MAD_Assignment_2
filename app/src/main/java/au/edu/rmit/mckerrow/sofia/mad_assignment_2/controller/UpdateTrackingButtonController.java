@@ -6,10 +6,10 @@ import android.view.View;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.EditTrackingActivity;
 
-public class EditTrackingButtonController implements View.OnClickListener{
+public class UpdateTrackingButtonController implements View.OnClickListener{
     Context mContext;
 
-    public EditTrackingButtonController(Context mContext) {
+    public UpdateTrackingButtonController(Context mContext) {
         this.mContext = mContext;
     }
 

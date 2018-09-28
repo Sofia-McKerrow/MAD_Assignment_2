@@ -25,6 +25,7 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
     private TrackableInfo trackableInfo;
     public static final String TRACKABLE_ID_KEY = "trackable_id_key";
     public static final String TRACKING_ID_KEY = "tracking_id_key";
+    public static final String POSITION_KEY = "position_key";
 
     public TrackingAdapter(Context mContext, List<BirdTracking> trackingList) {
         this.mContext = mContext;
@@ -40,7 +41,7 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(TrackingAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(TrackingAdapter.ViewHolder holder, final int position) {
         final BirdTracking birdTracking = trackingList.get(position);
         holder.setData(birdTracking, position);
 
@@ -68,15 +69,10 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
                 String trackingID = birdTracking.getTrackingID();
                 Intent intent = new Intent(mContext, EditTrackingActivity.class);
                 intent.putExtra(TRACKING_ID_KEY, trackingID);
+                intent.putExtra(POSITION_KEY, position);
                 mContext.startActivity(intent);
             }
         });
-//        holder.setItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void onItemClick(int pos) {
-//                openEditActivity(finalTrackableName, title, meetDate, pos);
-//            }
-//        });
     }
 
     @Override

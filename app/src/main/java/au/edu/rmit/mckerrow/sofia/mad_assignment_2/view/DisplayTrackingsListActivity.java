@@ -12,7 +12,6 @@ import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.AddTrackingButtonController;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.EditTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.CRUD;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
@@ -51,8 +50,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         adapter = new TrackingAdapter(this, trackingList);
-        crud = new CRUD(trackingList);
-
         recyclerView.setAdapter(adapter);
 
         addTracking = (Button) findViewById(R.id.addTracking);
@@ -60,7 +57,7 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
 //        editTracking = (Button) findViewById(R.id.editTracking);
 //        if (editTracking != null) {
-//            editTracking.setOnClickListener(new EditTrackingButtonController(this));
+//            editTracking.setOnClickListener(new UpdateTrackingButtonController(this));
 //        }
     }
 

@@ -1,19 +1,18 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.List;
-import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.RemoveTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
 public class EditTrackingActivity extends AppCompatActivity {
@@ -24,6 +23,8 @@ public class EditTrackingActivity extends AppCompatActivity {
     private static List<BirdTracking> trackingList;
     private TrackingInfo trackingInfo;
     private BirdTracking birdTracking;
+    private Button updateTracking;
+    private Button removeTracking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,13 @@ public class EditTrackingActivity extends AppCompatActivity {
         editTitle = (EditText) findViewById(R.id.editTitleEntry);
         title = birdTracking.getTitle();
         editTitle.setText(title);
+
+        position = getIntent().getExtras().getInt("POSITION_KEY");
+
+        updateTracking = (Button) findViewById(R.id.updateTracking);
+//        updateTracking.setOnClickListener(new UpdateTrackingButtonController(this, this));
+        removeTracking = (Button) findViewById(R.id.removeTracking);
+        removeTracking.setOnClickListener(new RemoveTrackingButtonController(this, position));
     }
 
     // Set category names in spinner
