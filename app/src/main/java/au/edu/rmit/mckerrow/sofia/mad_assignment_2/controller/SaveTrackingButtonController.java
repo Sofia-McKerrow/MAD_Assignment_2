@@ -2,6 +2,7 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,7 +13,6 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.CRUD;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
@@ -38,7 +38,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     // Add tracking to the trackings list when the Save button is clicked
     @Override
     public void onClick(View v) {
-        updateTrackingList(activity);
+        addTracking(activity);
 
         adapter = DisplayTrackingsListActivity.getAdapter();
         adapter.notifyDataSetChanged();
@@ -46,7 +46,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         mContext.startActivity(new Intent(mContext, TabWidgetActivity.class));
     }
 
-    public void updateTrackingList(AddTrackingActivity activity) {
+    public void addTracking(AddTrackingActivity activity) {
         trackingInfo = TrackingInfo.getSingletonInstance(mContext);
         trackingList = trackingInfo.getTrackingList();
 
@@ -54,7 +54,9 @@ public class SaveTrackingButtonController implements View.OnClickListener{
             trackingList = new ArrayList<BirdTracking>();
         }
 
-        String trackingID = "tr" + trackingList.size() + 1;
+        Log.i("MyTag", "Tracking list size " + trackingList.size());
+        int temp = trackingList.size() + 1;
+        String trackingID = "tr" + temp;
 
         String trackableID = null;
         Spinner trackableSpinner = (Spinner) activity.findViewById(R.id.trackableNameSpinner);
@@ -87,5 +89,9 @@ public class SaveTrackingButtonController implements View.OnClickListener{
 
         trackingList.add(tracking);
         trackingInfo.setTrackingList(trackingList);
+
+        for (int i = 0; i < trackingList.size(); i++) {
+            Log.i("MyTag", trackingList.get(i).toString());
+        }
     }
 }

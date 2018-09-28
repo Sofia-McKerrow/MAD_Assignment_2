@@ -13,7 +13,6 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.AddTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.CRUD;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
 public class DisplayTrackingsListActivity extends AppCompatActivity {
@@ -21,10 +20,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
     private TrackingInfo trackingInfo;
     private static TrackingAdapter adapter;
     private Button addTracking;
-    private Button editTracking;
-    private CRUD crud;
-
-    private static final String LOG_TAG = "DisplayTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +36,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
         if (trackingList == null) {
             trackingList = new ArrayList<BirdTracking>();
         }
-//        for (int i = 0; i < trackingList.size(); i++) {
-//            Log.i(LOG_TAG, "Tracking List " + trackingList.get(i).toString());
-//        }
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvTrackings);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,11 +46,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
         addTracking = (Button) findViewById(R.id.addTracking);
         addTracking.setOnClickListener(new AddTrackingButtonController(this));
-
-//        editTracking = (Button) findViewById(R.id.editTracking);
-//        if (editTracking != null) {
-//            editTracking.setOnClickListener(new UpdateTrackingButtonController(this));
-//        }
     }
 
     public static TrackingAdapter getAdapter() {

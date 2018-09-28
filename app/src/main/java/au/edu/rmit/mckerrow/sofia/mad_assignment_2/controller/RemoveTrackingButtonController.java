@@ -2,6 +2,7 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -17,7 +18,6 @@ public class RemoveTrackingButtonController implements View.OnClickListener{
 
     private Context mContext;
     private static List<BirdTracking> trackingList;
-    private BirdTracking tracking;
     private TrackingInfo trackingInfo;
     private TrackingAdapter adapter;
     private int position;

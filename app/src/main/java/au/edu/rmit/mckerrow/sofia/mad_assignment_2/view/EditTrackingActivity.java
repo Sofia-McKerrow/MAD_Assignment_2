@@ -12,6 +12,7 @@ import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.RemoveTrackingButtonController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.UpdateTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
@@ -48,10 +49,10 @@ public class EditTrackingActivity extends AppCompatActivity {
         title = birdTracking.getTitle();
         editTitle.setText(title);
 
-        position = getIntent().getExtras().getInt("POSITION_KEY");
+        position = getIntent().getExtras().getInt("position_key");
 
         updateTracking = (Button) findViewById(R.id.updateTracking);
-//        updateTracking.setOnClickListener(new UpdateTrackingButtonController(this, this));
+        updateTracking.setOnClickListener(new UpdateTrackingButtonController(this, this, position));
         removeTracking = (Button) findViewById(R.id.removeTracking);
         removeTracking.setOnClickListener(new RemoveTrackingButtonController(this, position));
     }
@@ -59,13 +60,13 @@ public class EditTrackingActivity extends AppCompatActivity {
     // Set category names in spinner
     private void setUpSpinners() {
         Spinner trackableSpinner = (Spinner) findViewById(R.id.editTrackableNameSpinner);
-        ArrayAdapter<CharSequence> arrayAdapter1 = ArrayAdapter.createFromResource(this, R.array.spinner_trackables, android.R.layout.simple_spinner_item);
-        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        trackableSpinner.setAdapter(arrayAdapter1);
+        ArrayAdapter<CharSequence> arrayAdapterName = ArrayAdapter.createFromResource(this, R.array.spinner_trackables, android.R.layout.simple_spinner_item);
+        arrayAdapterName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        trackableSpinner.setAdapter(arrayAdapterName);
 
         Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
-        ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
-        arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        meetDateSpinner.setAdapter(arrayAdapter2);
+        ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
+        arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        meetDateSpinner.setAdapter(arrayAdapterDate);
     }
 }
