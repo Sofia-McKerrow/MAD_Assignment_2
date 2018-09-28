@@ -1,4 +1,4 @@
-package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
+package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackableRouteInfoActivity;
 
 import java.io.IOException;
 import java.io.InputStream;

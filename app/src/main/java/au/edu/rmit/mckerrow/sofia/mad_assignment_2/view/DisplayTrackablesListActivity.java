@@ -1,10 +1,8 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -15,7 +13,6 @@ import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.TrackableAdapter;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;

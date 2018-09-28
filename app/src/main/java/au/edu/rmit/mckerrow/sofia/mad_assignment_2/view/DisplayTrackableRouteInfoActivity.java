@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.TrackableAdapter;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.TrackingService;

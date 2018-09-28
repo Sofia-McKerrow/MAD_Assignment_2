@@ -18,6 +18,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TrackingAdapter;
 
 public class SaveTrackingButtonController implements View.OnClickListener{
 
@@ -28,8 +29,6 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     private TrackingAdapter adapter;
     private AddTrackingActivity activity;
     private List<BirdTrackable> trackableList;
-    private int position;
-    private CRUD crud;
 
     public SaveTrackingButtonController(Context mContext, AddTrackingActivity activity) {
         this.mContext = mContext;
@@ -88,9 +87,5 @@ public class SaveTrackingButtonController implements View.OnClickListener{
 
         trackingList.add(tracking);
         trackingInfo.setTrackingList(trackingList);
-    }
-
-    public void editTracking(AddTrackingActivity activity) {
-        String trackingID = activity.getIntent().getExtras().getString(TrackingAdapter.TRACKING_ID_KEY);
     }
 }

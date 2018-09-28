@@ -8,15 +8,14 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TrackableAdapter;
 
 public class FilterController implements AdapterView.OnItemSelectedListener {
 

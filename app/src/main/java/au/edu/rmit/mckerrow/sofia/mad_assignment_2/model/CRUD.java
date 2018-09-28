@@ -6,7 +6,8 @@ import java.util.List;
 public class CRUD {
     private List<BirdTracking> trackingList;
 
-    public CRUD(List<BirdTracking> trackingList) {
+    public CRUD(List<BirdTracking> trackingList)
+    {
         this.trackingList = trackingList;
     }
 
@@ -20,7 +21,6 @@ public class CRUD {
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -53,7 +53,5 @@ public class CRUD {
         return false;
     }
 
-    public List<BirdTracking> getTrackingList() {
-        return trackingList;
-    }
+    public List<BirdTracking> getTrackingList() { return trackingList; }
 }
