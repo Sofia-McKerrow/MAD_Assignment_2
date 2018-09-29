@@ -34,19 +34,11 @@ public class EditTrackingActivity extends AppCompatActivity {
 
         setUpSpinners();
 
-        String trackingID = getIntent().getExtras().getString(TrackingAdapter.TRACKING_ID_KEY);
-        trackingInfo = TrackingInfo.getSingletonInstance(mContext);
-        trackingList = trackingInfo.getTrackingList();
+        String trackingID = getCurrentTrackingID();
+        birdTracking = getCurrentTracking(trackingID);
 
-        for (int i = 0; i < trackingList.size(); i++) {
-            if (trackingList.get(i).getTrackingID().equals(trackingID)) {
-                birdTracking = trackingList.get(i);
-                break;
-            }
-        }
-
-        editTitle = (EditText) findViewById(R.id.editTitleEntry);
         title = birdTracking.getTitle();
+        editTitle = (EditText) findViewById(R.id.editTitleEntry);
         editTitle.setText(title);
 
         position = getIntent().getExtras().getInt("position_key");
@@ -58,15 +50,57 @@ public class EditTrackingActivity extends AppCompatActivity {
     }
 
     // Set category names in spinner
-    private void setUpSpinners() {
+    public void setUpSpinners() {
         Spinner trackableSpinner = (Spinner) findViewById(R.id.editTrackableNameSpinner);
         ArrayAdapter<CharSequence> arrayAdapterName = ArrayAdapter.createFromResource(this, R.array.spinner_trackables, android.R.layout.simple_spinner_item);
         arrayAdapterName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         trackableSpinner.setAdapter(arrayAdapterName);
+
+        String trackingID = getCurrentTrackingID();
+        birdTracking = getCurrentTracking(trackingID);
+
+        // If the selected tracking's trackable ID is 1, display "Australian Magpie" in the trackable name spinner
+        if (birdTracking.getTrackableID().equals("1")) {
+            trackableSpinner.setSelection(0);
+        }
+        // If the selected tracking's trackable ID is 2, display "Kookaburra" in the trackable name spinner
+        else if (birdTracking.getTrackableID().equals("2")) {
+            trackableSpinner.setSelection(1);
+        }
+        // If the selected tracking's trackable ID is 3, display "Sulphur-Crested Cockatoo" in the trackable name spinner
+        else if (birdTracking.getTrackableID().equals("3")) {
+            trackableSpinner.setSelection(2);
+        }
 
         Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
         ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
         arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         meetDateSpinner.setAdapter(arrayAdapterDate);
     }
+
+    // Get the selected tracking
+    public BirdTracking getCurrentTracking(String trackingID) {
+        BirdTracking currentTracking = null;
+
+        trackingInfo = TrackingInfo.getSingletonInstance(mContext);
+        trackingList = trackingInfo.getTrackingList();
+
+        for (int i = 0; i < trackingList.size(); i++) {
+            if (trackingList.get(i).getTrackingID().equals(trackingID)) {
+                currentTracking = trackingList.get(i);
+                break;
+            }
+        }
+
+        return currentTracking;
+    }
+
+    // Get the tracking ID of the selected tracking
+    public String getCurrentTrackingID () {
+        String id = getIntent().getExtras().getString(TrackingAdapter.TRACKING_ID_KEY);;
+
+        return id;
+    }
+
+
 }
