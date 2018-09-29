@@ -42,6 +42,18 @@
         <item>05/07/2018 1:50:00 PM</item>
         <item>05/07/2018 1:55:00 PM</item>
     </string-array>
+    <string-array name="meet_dates_magpie">
+        <item>05/07/2018 1:10:00</item>
+        <item>05/07/2018 1:30:00</item>
+    </string-array>
+    <string-array name="meet_dates_kookaburra">
+        <item>05/07/2018 1:10:00</item>
+        <item>05/07/2018 1:35:00</item>
+    </string-array>
+    <string-array name="meet_dates_cockatoo">
+        <item>05/07/2018 1:30:00</item>
+        <item>05/07/2018 1:55:00</item>
+    </string-array>
     <string name="title_activity_edit_tracking">EditTrackingActivity</string>
 
 </resources>

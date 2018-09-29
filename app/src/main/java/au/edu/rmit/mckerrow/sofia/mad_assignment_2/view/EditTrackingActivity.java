@@ -3,6 +3,8 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +18,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.UpdateTrackingButt
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
-public class EditTrackingActivity extends AppCompatActivity {
+public class EditTrackingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Context mContext;
     private EditText editTitle;
     private String title;
@@ -71,11 +73,17 @@ public class EditTrackingActivity extends AppCompatActivity {
         else if (birdTracking.getTrackableID().equals("3")) {
             trackableSpinner.setSelection(2);
         }
+        // Show default trackable name in trackable name spinner
+        else {
+            trackableSpinner.setSelection(0);
+        }
 
-        Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
-        ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
-        arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        meetDateSpinner.setAdapter(arrayAdapterDate);
+        trackableSpinner.setOnItemSelectedListener(this);
+
+//        Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
+//        ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
+//        arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        meetDateSpinner.setAdapter(arrayAdapterDate);
     }
 
     // Get the selected tracking
@@ -103,4 +111,41 @@ public class EditTrackingActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Spinner trackableSpinner = (Spinner) findViewById(R.id.editTrackableNameSpinner);
+        String trackable = trackableSpinner.getSelectedItem().toString();
+
+        Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
+
+        // If trackable Australian Magpie is selected, display the meet dates/times for this trackable in the meetDateSpinner
+        if (trackable.contentEquals("Australian Magpie")) {
+            ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates_magpie,
+                    android.R.layout.simple_spinner_item);
+            arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            arrayAdapterDate.notifyDataSetChanged();
+            meetDateSpinner.setAdapter(arrayAdapterDate);
+        }
+        // If trackable Kookaburra is selected, display the meet dates/times for this trackable in the meetDateSpinner
+        else if (trackable.contentEquals("Kookaburra")) {
+            ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates_kookaburra,
+                    android.R.layout.simple_spinner_item);
+            arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            arrayAdapterDate.notifyDataSetChanged();
+            meetDateSpinner.setAdapter(arrayAdapterDate);
+        }
+        // If trackable Sulphur-Crested Cockatoo is selected, display the meet dates/times for this trackable in the meetDateSpinner
+        else if (trackable.contentEquals("Sulphur-Crested Cockatoo")) {
+            ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates_cockatoo,
+                    android.R.layout.simple_spinner_item);
+            arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            arrayAdapterDate.notifyDataSetChanged();
+            meetDateSpinner.setAdapter(arrayAdapterDate);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
