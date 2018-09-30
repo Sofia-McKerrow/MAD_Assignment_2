@@ -1,6 +1,8 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +17,17 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.RemoveTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.UpdateTrackingButtonController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DatabaseHelper;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackingsTable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
 public class EditTrackingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Context mContext;
+    private SQLiteDatabase mDatabase;
+    private SQLiteOpenHelper mDbHelper;
+    private DataSource mDataSource;
     private EditText editTitle;
     private String title;
     private int position;
@@ -33,6 +41,9 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_tracking);
+
+        mDataSource = new DataSource(this);
+        mDataSource.open();
 
         setUpSpinners();
 
@@ -110,7 +121,6 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
         return id;
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner trackableSpinner = (Spinner) findViewById(R.id.editTrackableNameSpinner);
@@ -147,5 +157,30 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDataSource.open();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        trackingInfo = TrackingInfo.getSingletonInstance(this);
+        trackingList = trackingInfo.getTrackingList();
+
+        mDbHelper = new DatabaseHelper(this);
+        mDatabase = mDbHelper.getWritableDatabase();
+
+        // Clear data in trackings table
+        mDatabase.delete(TrackingsTable.TABLE_TRACKINGS, null, null);
+
+        // Add items from trackings list to trackings table
+        mDataSource.seedDatabaseWithTrackings(trackingList);
+
+        mDataSource.close();
     }
 }

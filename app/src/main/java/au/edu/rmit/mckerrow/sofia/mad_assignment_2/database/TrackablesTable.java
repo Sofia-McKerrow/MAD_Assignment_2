@@ -10,6 +10,9 @@ public class TrackablesTable {
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_IMAGE = "image";
 
+    public static final String[] ALL_COLUMNS =
+            {COLUMN_TRACKABLE_ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_URL, COLUMN_CATEGORY, COLUMN_IMAGE};
+
     // Create trackables table
     public static final String SQL_CREATE =
             "CREATE TABLE " + TABLE_TRACKABLES + "(" +

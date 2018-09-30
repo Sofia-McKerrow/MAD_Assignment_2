@@ -13,6 +13,9 @@ public abstract class AbstractTrackable {
     private String category;
     private String image;
 
+    public AbstractTrackable() {
+    }
+
     public AbstractTrackable(int trackableID, String name, String description, String url, String category, String image) {
         this.trackableID = trackableID;
         this.name = name;

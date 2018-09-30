@@ -25,6 +25,7 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     private TrackableInfo trackableInfo;
     private static TrackableAdapter adapter;
     private DataSource mDataSource;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,12 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
         setContentView(R.layout.trackables_list);
 
         updateTrackablesDB();
+
+        if (trackableList != null) {
+            trackableList.clear();
+        }
+        ReadFile.readTrackableFile(this);
+        trackableList = ReadFile.getTrackableList();
 
         // Sort list alphabetically
         Collections.sort(trackableList, new Comparator<BirdTrackable>() {
@@ -41,9 +48,11 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
             }
         });
 
+//        trackableList = mDataSource.getAllTrackables();
+//
         adapter = new TrackableAdapter(this, trackableList);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvTrackables);
+        recyclerView = (RecyclerView) findViewById(R.id.rvTrackables);
         recyclerView.setAdapter(adapter);
 
         setUpSpinner();

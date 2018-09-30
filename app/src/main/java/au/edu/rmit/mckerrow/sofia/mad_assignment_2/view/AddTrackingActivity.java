@@ -1,5 +1,7 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,16 +11,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.List;
+
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.SaveTrackingButtonController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DatabaseHelper;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackingsTable;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
 public class AddTrackingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private SQLiteDatabase mDatabase;
+    private SQLiteOpenHelper mDbHelper;
+    private DataSource mDataSource;
+    private TrackingInfo trackingInfo;
+    private List<BirdTracking> trackingList;
     private Button saveTracking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_tracking);
+
+        mDataSource = new DataSource(this);
+        mDataSource.open();
 
         setUpSpinners();
 
@@ -71,5 +88,30 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDataSource.open();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        trackingInfo = TrackingInfo.getSingletonInstance(this);
+        trackingList = trackingInfo.getTrackingList();
+
+        mDbHelper = new DatabaseHelper(this);
+        mDatabase = mDbHelper.getWritableDatabase();
+
+        // Clear data in trackings table
+        mDatabase.delete(TrackingsTable.TABLE_TRACKINGS, null, null);
+
+        // Add items from trackings list to trackings table
+        mDataSource.seedDatabaseWithTrackings(trackingList);
+
+        mDataSource.close();
     }
 }

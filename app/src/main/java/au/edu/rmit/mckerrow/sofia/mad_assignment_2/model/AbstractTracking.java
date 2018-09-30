@@ -30,6 +30,10 @@ public abstract class AbstractTracking {
         this.meetLocation = meetLocation;
     }
 
+    public AbstractTracking() {
+
+    }
+
     public String getTrackingID() {
         return trackingID;
     }
