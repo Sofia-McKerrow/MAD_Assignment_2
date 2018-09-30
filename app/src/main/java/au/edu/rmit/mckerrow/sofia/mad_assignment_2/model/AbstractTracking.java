@@ -1,6 +1,11 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.model;
 
+import android.content.ContentValues;
+
 import java.util.Date;
+
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackablesTable;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackingsTable;
 
 public abstract class AbstractTracking {
 
@@ -87,6 +92,21 @@ public abstract class AbstractTracking {
 
     public void setMeetLocation(String meetLocation) {
         this.meetLocation = meetLocation;
+    }
+
+    public ContentValues toValues() {
+        ContentValues values = new ContentValues(8);
+
+        values.put(TrackingsTable.COLUMN_TRACKING_ID, trackingID);
+        values.put(TrackingsTable.COLUMN_TRACKABLE_ID, trackableID);
+        values.put(TrackingsTable.COLUMN_TITLE, title);
+        values.put(TrackingsTable.COLUMN_START_TIME, startTime);
+        values.put(TrackingsTable.COLUMN_FINISH_TIME, finishTime);
+        values.put(TrackingsTable.COLUMN_MEET_TIME, meetTime);
+        values.put(TrackingsTable.COLUMN_CURRENT_LOCATION, currentLocation);
+        values.put(TrackingsTable.COLUMN_MEET_LOCATION, meetLocation);
+
+        return values;
     }
 
     @Override

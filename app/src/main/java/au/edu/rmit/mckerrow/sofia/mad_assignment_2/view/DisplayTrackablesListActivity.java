@@ -31,17 +31,7 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackables_list);
 
-        mDataSource = new DataSource(this);
-        mDataSource.open();
-
-        if (trackableList != null) {
-            trackableList.clear();
-        }
-        ReadFile.readTrackableFile(this);
-        trackableList = ReadFile.getTrackableList();
-
-        // Insert the data from the trackable list into the trackables table in the database
-        mDataSource.seedDatabase(trackableList);
+        updateTrackablesDB();
 
         // Sort list alphabetically
         Collections.sort(trackableList, new Comparator<BirdTrackable>() {
@@ -88,6 +78,20 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mDataSource.close();
+    }
+
+    public void updateTrackablesDB() {
+        mDataSource = new DataSource(this);
+        mDataSource.open();
+
+        if (trackableList != null) {
+            trackableList.clear();
+        }
+        ReadFile.readTrackableFile(this);
+        trackableList = ReadFile.getTrackableList();
+
+        // Insert the data from the trackable list into the trackables table in the database
+        mDataSource.seedDatabaseWithTrackables(trackableList);
     }
 
 }

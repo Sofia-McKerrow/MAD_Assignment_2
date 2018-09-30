@@ -12,6 +12,7 @@ import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.AddTrackingButtonController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
 
@@ -20,22 +21,14 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
     private TrackingInfo trackingInfo;
     private static TrackingAdapter adapter;
     private Button addTracking;
+    private DataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackings_list);
 
-        // Check if a trackableInfo singleton has been created
-        if (trackingInfo == null) {
-            trackingInfo = TrackingInfo.getSingletonInstance(this);
-        }
-
-        trackingList = trackingInfo.getTrackingList();
-
-        if (trackingList == null) {
-            trackingList = new ArrayList<BirdTracking>();
-        }
+        updateTrackingsDB();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvTrackings);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,5 +43,36 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
     public static TrackingAdapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDataSource.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDataSource.close();
+    }
+
+    public void updateTrackingsDB() {
+        mDataSource = new DataSource(this);
+        mDataSource.open();
+
+        // Check if a trackingInfo singleton has been created
+        if (trackingInfo == null) {
+            trackingInfo = TrackingInfo.getSingletonInstance(this);
+        }
+
+        trackingList = trackingInfo.getTrackingList();
+
+        if (trackingList == null) {
+            trackingList = new ArrayList<BirdTracking>();
+        }
+
+        // Insert the data from the tracking list into the trackings table in the database
+        mDataSource.seedDatabaseWithTrackings(trackingList);
     }
 }

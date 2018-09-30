@@ -1,23 +1,14 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
 import android.content.Intent;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DBHelper;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 
 public class TabWidgetActivity extends android.app.TabActivity {
 
