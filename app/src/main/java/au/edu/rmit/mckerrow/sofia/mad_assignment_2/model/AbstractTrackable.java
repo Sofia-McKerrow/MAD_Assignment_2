@@ -1,5 +1,9 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.model;
 
+import android.content.ContentValues;
+
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackablesTable;
+
 public abstract class AbstractTrackable {
 
     private int trackableID;
@@ -61,6 +65,19 @@ public abstract class AbstractTrackable {
     public String getImage() { return image; }
 
     public void setImage(String image) { this.image = image; }
+
+    public ContentValues toValues() {
+        ContentValues values = new ContentValues(6);
+
+        values.put(TrackablesTable.COLUMN_TRACKABLE_ID, trackableID);
+        values.put(TrackablesTable.COLUMN_NAME, name);
+        values.put(TrackablesTable.COLUMN_DESCRIPTION, description);
+        values.put(TrackablesTable.COLUMN_URL, url);
+        values.put(TrackablesTable.COLUMN_CATEGORY, category);
+        values.put(TrackablesTable.COLUMN_IMAGE, image);
+
+        return values;
+    }
 
     @Override
     public String toString() {

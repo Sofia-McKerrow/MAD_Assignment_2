@@ -13,6 +13,7 @@ import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
@@ -23,17 +24,24 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     private static Map<String, BirdTrackable> trackableMap;
     private TrackableInfo trackableInfo;
     private static TrackableAdapter adapter;
+    private DataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackables_list);
 
+        mDataSource = new DataSource(this);
+        mDataSource.open();
+
         if (trackableList != null) {
             trackableList.clear();
         }
         ReadFile.readTrackableFile(this);
         trackableList = ReadFile.getTrackableList();
+
+        // Insert the data from the trackable list into the trackables table in the database
+        mDataSource.seedDatabase(trackableList);
 
         // Sort list alphabetically
         Collections.sort(trackableList, new Comparator<BirdTrackable>() {
@@ -68,6 +76,18 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
 
     public static TrackableAdapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDataSource.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDataSource.close();
     }
 
 }
