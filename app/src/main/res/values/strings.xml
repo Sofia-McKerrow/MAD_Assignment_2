@@ -16,6 +16,7 @@
     <string name="meet_date">Date</string>
     <string name="meet_time">Meet Time</string>
     <string name="meet_location">Meet Location</string>
+    <string name="current_location">Current Location</string>
     <string name="edit_tracking">Edit</string>
     <string name="remove_tracking">Remove</string>
     <string name="enter_title">Enter title</string>
@@ -28,20 +29,6 @@
         <item>Sulphur-Crested Cockatoo</item>
     </string-array>
     <string name="select_meet_date">Select meeting date/time</string>
-    <string-array name="meet_dates">
-        <item>05/07/2018 1:00:00 PM</item>
-        <item>05/07/2018 1:05:00 PM</item>
-        <item>05/07/2018 1:10:00 PM</item>
-        <item>05/07/2018 1:15:00 PM</item>
-        <item>05/07/2018 1:20:00 PM</item>
-        <item>05/07/2018 1:25:00 PM</item>
-        <item>05/07/2018 1:30:00 PM</item>
-        <item>05/07/2018 1:35:00 PM</item>
-        <item>05/07/2018 1:40:00 PM</item>
-        <item>05/07/2018 1:45:00 PM</item>
-        <item>05/07/2018 1:50:00 PM</item>
-        <item>05/07/2018 1:55:00 PM</item>
-    </string-array>
     <string-array name="meet_dates_magpie">
         <item>05/07/2018 1:10:00</item>
         <item>05/07/2018 1:30:00</item>

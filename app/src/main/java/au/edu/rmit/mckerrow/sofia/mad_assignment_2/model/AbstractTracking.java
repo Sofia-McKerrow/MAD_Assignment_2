@@ -112,21 +112,14 @@ public abstract class AbstractTracking {
         }
 
         List<Date> dates = getDatesFromTrackingService(context, matched);
-//        Date currentDate = new Date();
-//        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss a", Locale.ENGLISH);
-//        String strCurrentDate = sdf.format(currentDate);
-//        Log.i("MyTag", "strCurrentDate " + strCurrentDate);
         Date targetDate = null;
-//        try {
-//            targetDate = sdf.parse(strCurrentDate);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
         // Get current time
         try {
             DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-            String searchDate = "05/07/2018 1:05:00 PM";
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss a", Locale.ENGLISH);
+            String searchDate = sdf.format(new Date());
+//            String searchDate = "05/07/2018 1:05:00 PM";
             targetDate = dateFormat.parse(searchDate);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -168,6 +161,7 @@ public abstract class AbstractTracking {
                 latitude = latitude.replace("lat=", "");
                 String longitude = match.split(",")[4];
                 longitude = longitude.replace("long=", "");
+                Log.i("MyTag", "latitude " + latitude);
                 currentLocation = latitude + ", " + longitude;
                 break;
             }
@@ -226,21 +220,18 @@ public abstract class AbstractTracking {
         {
             // 5 mins either side of current time
             DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
-            String searchDate = "05/07/2018 1:05:00 PM";
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss a", Locale.ENGLISH);
+            String searchDate = sdf.format(new Date());
+//            String searchDate = "05/07/2018 1:05:00 PM";
             int searchWindow = 5; // +/- 5 mins
             Date date = dateFormat.parse(searchDate);
+            Log.i("MyTag", "date " + date);
             matched = trackingService.getTrackingInfoForTimeRange(date, searchWindow, 0);
         }
         catch (ParseException e)
         {
             e.printStackTrace();
         }
-
-        // 5 mins either side of current time
-//        Date date = new Date();
-//        Log.i("MyTag", "date " + date);
-//        int searchWindow = 5; // +/- 5 mins
-//        matched = trackingService.getTrackingInfoForTimeRange(date, searchWindow, 0);
 
         for (int i = 0; i < matched.size(); i++) {
             Log.i("MyTag", "matched " + matched.get(i).toString());
