@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.List;
@@ -19,13 +18,13 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DatabaseHelper;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackingsTable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 
 public class AddTrackingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private SQLiteDatabase mDatabase;
     private SQLiteOpenHelper mDbHelper;
     private DataSource mDataSource;
-    private TrackingInfo trackingInfo;
+    private TrackingsListInfo trackingsListInfo;
     private List<BirdTracking> trackingList;
     private Button saveTracking;
 
@@ -100,8 +99,8 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
     protected void onStop() {
         super.onStop();
 
-        trackingInfo = TrackingInfo.getSingletonInstance(this);
-        trackingList = trackingInfo.getTrackingList();
+        trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
+        trackingList = trackingsListInfo.getTrackingList();
 
         mDbHelper = new DatabaseHelper(this);
         mDatabase = mDbHelper.getWritableDatabase();

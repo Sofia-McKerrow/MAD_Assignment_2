@@ -3,10 +3,10 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackablesListInfo;
 
 public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHolder>{
 
     private Context mContext;
     private List<BirdTracking> trackingList;
     private List<BirdTrackable> trackableList;
-    private TrackableInfo trackableInfo;
+    private TrackablesListInfo trackablesListInfo;
     public static final String TRACKING_ID_KEY = "tracking_id_key";
     public static final String POSITION_KEY = "position_key";
 
@@ -45,8 +45,8 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
 
         String trackableID = trackingList.get(position).getTrackableID();
         String trackableName = null;
-        trackableInfo = TrackableInfo.getSingletonInstance(mContext);
-        trackableList = trackableInfo.getTrackableList();
+        trackablesListInfo = TrackablesListInfo.getSingletonInstance(mContext);
+        trackableList = trackablesListInfo.getTrackableList();
 
         // Get trackable name for selected trackable from the trackableID of the currentTracking object
         for (int i = 0; i < trackableList.size(); i++) {
@@ -112,8 +112,8 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
         public void setData(BirdTracking currentTracking, int position) {
             String trackableID = currentTracking.getTrackableID();
             String trackableName = null;
-            trackableInfo = TrackableInfo.getSingletonInstance(mContext);
-            trackableList = trackableInfo.getTrackableList();
+            trackablesListInfo = TrackablesListInfo.getSingletonInstance(mContext);
+            trackableList = trackablesListInfo.getTrackableList();
 
             // Get trackable name for selected trackable from the trackableID of the currentTracking object
             for (int i = 0; i < trackableList.size(); i++) {
@@ -126,7 +126,9 @@ public class TrackingAdapter extends RecyclerView.Adapter<TrackingAdapter.ViewHo
             this.trackableName.setText(trackableName);
             this.titleValue.setText(currentTracking.getTitle());
             this.dateValue.setText(currentTracking.getMeetTime());
-            this.locationValue.setText(currentTracking.getMeetLocation());
+//            this.locationValue.setText(currentTracking.getMeetLocation());
+            int id = Integer.parseInt(trackableID);
+            this.locationValue.setText(currentTracking.getCurrentLocation(mContext, id));
             this.position = position;
             this.currentTracking = currentTracking;
         }

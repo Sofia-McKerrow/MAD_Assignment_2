@@ -2,39 +2,35 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.model;
 
 import android.content.Context;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Calendar.PM;
+public class TrackingsListInfo {
 
-public class TrackingInfo {
-
-    private static TrackingInfo trackingInfo;
+    private static TrackingsListInfo trackingsListInfo;
     private static Context mContext;
     private List<BirdTracking> trackingList;
 
     // Constructor for singleton
-    private TrackingInfo() {
+    private TrackingsListInfo() {
 
     }
 
     private static class TrackingLazyHolder {
-        static final TrackingInfo INSTANCE = new TrackingInfo();
+        static final TrackingsListInfo INSTANCE = new TrackingsListInfo();
     }
 
     // Initialise singleton
-    public static TrackingInfo getSingletonInstance(Context context) {
+    public static TrackingsListInfo getSingletonInstance(Context context) {
         mContext = context;
         return TrackingLazyHolder.INSTANCE;
     }
 
-    public static TrackingInfo getTrackableInfo() {
+    public static TrackingsListInfo getTrackableInfo() {
         // Check if a singleton object has been created
-        if (trackingInfo == null) {
-            trackingInfo = new TrackingInfo();
+        if (trackingsListInfo == null) {
+            trackingsListInfo = new TrackingsListInfo();
         }
-        return trackingInfo;
+        return trackingsListInfo;
     }
 
     public List<BirdTracking> getTrackingList() {

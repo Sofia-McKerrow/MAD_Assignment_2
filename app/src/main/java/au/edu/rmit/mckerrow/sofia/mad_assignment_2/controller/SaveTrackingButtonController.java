@@ -14,7 +14,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
@@ -24,7 +24,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
 
     private Context mContext;
     private static List<BirdTracking> trackingList;
-    private TrackingInfo trackingInfo;
+    private TrackingsListInfo trackingsListInfo;
     private BirdTracking tracking;
     private TrackingAdapter adapter;
     private AddTrackingActivity activity;
@@ -47,8 +47,8 @@ public class SaveTrackingButtonController implements View.OnClickListener{
     }
 
     public void addTracking(AddTrackingActivity activity) {
-        trackingInfo = TrackingInfo.getSingletonInstance(mContext);
-        trackingList = trackingInfo.getTrackingList();
+        trackingsListInfo = TrackingsListInfo.getSingletonInstance(mContext);
+        trackingList = trackingsListInfo.getTrackingList();
 
         if (trackingList == null) {
             trackingList = new ArrayList<BirdTracking>();
@@ -88,7 +88,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         tracking = new BirdTracking(trackingID, trackableID, title, startTime, finishTime, meetTime, currentLocation, meetLocation);
 
         trackingList.add(tracking);
-        trackingInfo.setTrackingList(trackingList);
+        trackingsListInfo.setTrackingList(trackingList);
 
         for (int i = 0; i < trackingList.size(); i++) {
             Log.i("MyTag", trackingList.get(i).toString());

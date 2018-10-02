@@ -14,7 +14,7 @@ import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackablesListInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.TrackingService;
 
 public class DisplayTrackableRouteInfoActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class DisplayTrackableRouteInfoActivity extends AppCompatActivity {
 
     private static List<BirdTrackable> trackableList;
     private static Map<String, BirdTrackable> trackableMap;
-    private TrackableInfo trackableInfo;
+    private TrackablesListInfo trackablesListInfo;
 
     private static final String LOG_TAG = TrackingService.class.getName();
 
@@ -33,13 +33,13 @@ public class DisplayTrackableRouteInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackable_route_info);
 
-        // Check if a trackableInfo singleton has been created
-        if (trackableInfo == null) {
-            trackableInfo = TrackableInfo.getSingletonInstance(this);
+        // Check if a trackablesListInfo singleton has been created
+        if (trackablesListInfo == null) {
+            trackablesListInfo = TrackablesListInfo.getSingletonInstance(this);
         }
 
-        trackableList = trackableInfo.getTrackableList();
-        trackableMap = trackableInfo.getTrackableMap();
+        trackableList = trackablesListInfo.getTrackableList();
+        trackableMap = trackablesListInfo.getTrackableMap();
         String trackableID = getIntent().getExtras().getString(TrackableAdapter.TRACKABLE_ID_KEY);
         BirdTrackable birdTrackable = trackableMap.get(trackableID);
 

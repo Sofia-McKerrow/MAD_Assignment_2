@@ -14,11 +14,11 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.AddTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 
 public class DisplayTrackingsListActivity extends AppCompatActivity {
     private static List<BirdTracking> trackingList;
-    private TrackingInfo trackingInfo;
+    private TrackingsListInfo trackingsListInfo;
     private static TrackingAdapter adapter;
     private Button addTracking;
     private DataSource mDataSource;
@@ -63,12 +63,12 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
     }
 
     public void updateTrackingsDB() {
-        // Check if a trackingInfo singleton has been created
-        if (trackingInfo == null) {
-            trackingInfo = TrackingInfo.getSingletonInstance(this);
+        // Check if a trackingsListInfo singleton has been created
+        if (trackingsListInfo == null) {
+            trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
         }
 
-        trackingList = trackingInfo.getTrackingList();
+        trackingList = trackingsListInfo.getTrackingList();
 
         if (trackingList == null) {
             trackingList = new ArrayList<BirdTracking>();
@@ -81,11 +81,11 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
     public void updateTrackingInfoList(List<BirdTracking> trackings) {
         trackings = mDataSource.getAllTrackings();
 
-        // Check if a trackingInfo singleton has been created
-        if (trackingInfo == null) {
-            trackingInfo = TrackingInfo.getSingletonInstance(this);
+        // Check if a trackingsListInfo singleton has been created
+        if (trackingsListInfo == null) {
+            trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
         }
-        // Set the tracking list to the trackingInfo singleton
-        trackingInfo.setTrackingList(trackings);
+        // Set the tracking list to the trackingsListInfo singleton
+        trackingsListInfo.setTrackingList(trackings);
     }
 }

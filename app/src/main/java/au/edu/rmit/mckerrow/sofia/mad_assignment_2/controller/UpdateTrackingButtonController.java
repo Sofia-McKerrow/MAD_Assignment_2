@@ -2,7 +2,6 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,8 +12,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.AddTrackingActivity;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackingsListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.EditTrackingActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
@@ -23,7 +21,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TrackingAdapter;
 public class UpdateTrackingButtonController implements View.OnClickListener{
     private Context mContext;
     private static List<BirdTracking> trackingList;
-    private TrackingInfo trackingInfo;
+    private TrackingsListInfo trackingsListInfo;
     private BirdTracking tracking;
     private TrackingAdapter adapter;
     private EditTrackingActivity activity;
@@ -47,8 +45,8 @@ public class UpdateTrackingButtonController implements View.OnClickListener{
     }
 
     public void updateTracking(EditTrackingActivity activity, int position) {
-        trackingInfo = TrackingInfo.getSingletonInstance(mContext);
-        trackingList = trackingInfo.getTrackingList();
+        trackingsListInfo = TrackingsListInfo.getSingletonInstance(mContext);
+        trackingList = trackingsListInfo.getTrackingList();
 
         trackingList.remove(position);
 
@@ -85,6 +83,6 @@ public class UpdateTrackingButtonController implements View.OnClickListener{
         tracking = new BirdTracking(trackingID, trackableID, title, startTime, finishTime, meetTime, currentLocation, meetLocation);
 
         trackingList.add(position, tracking);
-        trackingInfo.setTrackingList(trackingList);
+        trackingsListInfo.setTrackingList(trackingList);
     }
 }

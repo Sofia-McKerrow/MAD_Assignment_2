@@ -16,13 +16,14 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackableInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackablesListInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.TestTrackingService;
 
 public class DisplayTrackablesListActivity extends AppCompatActivity {
 
     private static List<BirdTrackable> trackableList;
     private static Map<String, BirdTrackable> trackableMap;
-    private TrackableInfo trackableInfo;
+    private TrackablesListInfo trackablesListInfo;
     private static TrackableAdapter adapter;
     private DataSource mDataSource;
     private RecyclerView recyclerView;
@@ -57,7 +58,7 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
 
         setUpSpinner();
 
-        // TestTrackingService.test(this);
+        TestTrackingService.test(this);
     }
 
     // Set category names in spinner

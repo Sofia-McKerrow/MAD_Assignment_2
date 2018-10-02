@@ -21,7 +21,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DatabaseHelper;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.TrackingsTable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
-import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 
 public class EditTrackingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Context mContext;
@@ -32,7 +32,7 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
     private String title;
     private int position;
     private static List<BirdTracking> trackingList;
-    private TrackingInfo trackingInfo;
+    private TrackingsListInfo trackingsListInfo;
     private BirdTracking birdTracking;
     private Button updateTracking;
     private Button removeTracking;
@@ -101,8 +101,8 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
     public BirdTracking getCurrentTracking(String trackingID) {
         BirdTracking currentTracking = null;
 
-        trackingInfo = TrackingInfo.getSingletonInstance(mContext);
-        trackingList = trackingInfo.getTrackingList();
+        trackingsListInfo = TrackingsListInfo.getSingletonInstance(mContext);
+        trackingList = trackingsListInfo.getTrackingList();
 
         for (int i = 0; i < trackingList.size(); i++) {
             if (trackingList.get(i).getTrackingID().equals(trackingID)) {
@@ -169,8 +169,8 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
     protected void onStop() {
         super.onStop();
 
-        trackingInfo = TrackingInfo.getSingletonInstance(this);
-        trackingList = trackingInfo.getTrackingList();
+        trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
+        trackingList = trackingsListInfo.getTrackingList();
 
         mDbHelper = new DatabaseHelper(this);
         mDatabase = mDbHelper.getWritableDatabase();
