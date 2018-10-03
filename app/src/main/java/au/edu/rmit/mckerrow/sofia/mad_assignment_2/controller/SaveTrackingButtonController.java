@@ -54,7 +54,6 @@ public class SaveTrackingButtonController implements View.OnClickListener{
             trackingList = new ArrayList<BirdTracking>();
         }
 
-        Log.i("MyTag", "Tracking list size " + trackingList.size());
         int temp = trackingList.size() + 1;
         String trackingID = "tr" + temp;
 
@@ -78,20 +77,23 @@ public class SaveTrackingButtonController implements View.OnClickListener{
 
         EditText titleValue = (EditText) activity.findViewById(R.id.titleEntry);
         String title = titleValue.getText().toString();
-        String startTime = "05/07/2018 1:05:00 PM";
-        String finishTime = "05/07/2018 1:10:00 PM";
         Spinner meetDateSpinner = (Spinner) activity.findViewById(R.id.meetDateSpinner);
         String meetTime = meetDateSpinner.getSelectedItem().toString();
+        String startTime = meetDateSpinner.getSelectedItem().toString();
+        String finishTime = meetDateSpinner.getSelectedItem().toString();
         String currentLocation = "-37.820666, 144.958277";
         String meetLocation = "-37.820666, 144.958277";
 
         tracking = new BirdTracking(trackingID, trackableID, title, startTime, finishTime, meetTime, currentLocation, meetLocation);
 
+        currentLocation = tracking.getCurrentLocation(mContext, Integer.parseInt(trackableID));
+        tracking.setCurrentLocation(currentLocation);
+        finishTime = tracking.returnFinishTime(trackableID, meetTime);
+        tracking.setFinishTime(finishTime);
+        meetLocation = tracking.returnMeetLocation(trackableID, meetTime);
+        tracking.setMeetLocation(meetLocation);
+
         trackingList.add(tracking);
         trackingsListInfo.setTrackingList(trackingList);
-
-        for (int i = 0; i < trackingList.size(); i++) {
-            Log.i("MyTag", trackingList.get(i).toString());
-        }
     }
 }

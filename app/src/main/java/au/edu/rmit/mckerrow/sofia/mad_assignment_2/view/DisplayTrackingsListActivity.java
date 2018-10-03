@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -44,6 +45,10 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
         addTracking = (Button) findViewById(R.id.addTracking);
         addTracking.setOnClickListener(new AddTrackingButtonController(this));
+
+        for (int i = 0; i < trackingList.size(); i++) {
+            Log.i("MyTag", trackingList.get(i).toString());
+        }
     }
 
     public static TrackingAdapter getAdapter() {

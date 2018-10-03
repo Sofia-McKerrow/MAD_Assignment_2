@@ -80,12 +80,9 @@ public abstract class AbstractTracking {
         this.startTime = startTime;
     }
 
-    public String getFinishTime() {
-        return finishTime;
-    }
+    public String getFinishTime() { return finishTime; }
 
-    public void setFinishTime(String finishTime) {
-        this.finishTime = finishTime;
+    public void setFinishTime(String finishTime) { this.finishTime = finishTime;
     }
 
     public String getMeetTime() {
@@ -124,7 +121,6 @@ public abstract class AbstractTracking {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.i("MyTag", "targetDate " + targetDate);
 
         // Get date closest to current time
         Date nearestDate = null;
@@ -139,7 +135,6 @@ public abstract class AbstractTracking {
                 nearestDate = temp;
             }
         }
-        Log.i("MyTag", "nearestDate " + nearestDate);
 
         // Get location of tracking with date closest to current time
         for (int i = 0; i < matched.size(); i++) {
@@ -161,7 +156,6 @@ public abstract class AbstractTracking {
                 latitude = latitude.replace("lat=", "");
                 String longitude = match.split(",")[4];
                 longitude = longitude.replace("long=", "");
-                Log.i("MyTag", "latitude " + latitude);
                 currentLocation = latitude + ", " + longitude;
                 break;
             }
@@ -175,6 +169,7 @@ public abstract class AbstractTracking {
     }
 
     public String getMeetLocation() {
+
         return meetLocation;
     }
 
@@ -225,16 +220,11 @@ public abstract class AbstractTracking {
 //            String searchDate = "05/07/2018 1:05:00 PM";
             int searchWindow = 5; // +/- 5 mins
             Date date = dateFormat.parse(searchDate);
-            Log.i("MyTag", "date " + date);
             matched = trackingService.getTrackingInfoForTimeRange(date, searchWindow, 0);
         }
         catch (ParseException e)
         {
             e.printStackTrace();
-        }
-
-        for (int i = 0; i < matched.size(); i++) {
-            Log.i("MyTag", "matched " + matched.get(i).toString());
         }
 
         return matched;
@@ -264,35 +254,58 @@ public abstract class AbstractTracking {
         return dates;
     }
 
-    // Get latitudes for matched trackings from TrackingService
-    public List<String> getLatitudesFromTrackingService(Context context, List<TrackingService.TrackingInfo> matchedTrackings) {
-        List<String> latitudes = new ArrayList<String>();
-        String latitude = null;
-        matchedTrackings = getMatchedTrackingsFromTrackingService(context);
-
-        for (int i = 0; i < matchedTrackings.size(); i++) {
-            String match = matchedTrackings.get(i).toString();
-            latitude = match.split(",")[3];
-            latitudes.add(latitude);
+    public String returnFinishTime(String trackableId, String meet) {
+        String finish = null;
+        if (trackableId.equals("1") && meet.equals("05/07/2018 1:10:00 PM")) {
+            finish = "05/07/2018 1:15:00 PM";
+        }
+        else if (trackableId.equals("1") && meet.equals("05/07/2018 1:30:00 PM")) {
+            finish = "05/07/2018 1:40:00 PM";
+        }
+        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:10:00 PM")) {
+            finish = "05/07/2018 1:15:00 PM";
+        }
+        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:35:00 PM")) {
+            finish = "05/07/2018 1:45:00 PM";
+        }
+        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:30:00 PM")) {
+            finish = "05/07/2018 1:40:00 PM";
+        }
+        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:55:00 PM")) {
+            finish = "05/07/2018 2:00:00 PM";
+        }
+        else {
+            finish = "05/07/2018 1:15:00 PM";
         }
 
-        return latitudes;
+        return finish;
     }
 
-    // Get longitudes for matched trackings from TrackingService
-    public List<String> getLongitudesFromTrackingService(Context context, List<TrackingService.TrackingInfo> matchedTrackings) {
-        List<String> longitudes = new ArrayList<String>();
-        String longitude = null;
-        matchedTrackings = getMatchedTrackingsFromTrackingService(context);
-
-        for (int i = 0; i < matchedTrackings.size(); i++) {
-            String match = matchedTrackings.get(i).toString();
-            longitude = match.split(",")[4];
-            longitudes.add(longitude);
+    public String returnMeetLocation(String trackableId, String meet) {
+        String location = null;
+        if (trackableId.equals("1") && meet.equals("05/07/2018 1:10:00 PM")) {
+            location = "-37.810828, 144.947005";
+        }
+        else if (trackableId.equals("1") && meet.equals("05/07/2018 1:30:00 PM")) {
+            location = "-37.809548, 144.954993";
+        }
+        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:10:00 PM")) {
+            location = "-37.820666, 144.958277";
+        }
+        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:35:00 PM")) {
+            location = "-37.810045, 144.964220";
+        }
+        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:30:00 PM")) {
+            location = "-37.810045, 144.964220";
+        }
+        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:55:00 PM")) {
+            location = "-37.810828, 144.947005";
+        }
+        else {
+            location = "-37.810828, 144.947005";
         }
 
-        return longitudes;
+        return location;
     }
-
 
 }

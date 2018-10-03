@@ -73,14 +73,21 @@ public class UpdateTrackingButtonController implements View.OnClickListener{
 
         EditText titleValue = (EditText) activity.findViewById(R.id.editTitleEntry);
         String title = titleValue.getText().toString();
-        String startTime = "05/07/2018 1:05:00 PM";
-        String finishTime = "05/07/2018 1:10:00 PM";
         Spinner meetDateSpinner = (Spinner) activity.findViewById(R.id.editMeetDateSpinner);
         String meetTime = meetDateSpinner.getSelectedItem().toString();
+        String startTime = meetDateSpinner.getSelectedItem().toString();
+        String finishTime = "05/07/2018 1:10:00 PM";
         String currentLocation = "-37.820666, 144.958277";
         String meetLocation = "-37.820666, 144.958277";
 
         tracking = new BirdTracking(trackingID, trackableID, title, startTime, finishTime, meetTime, currentLocation, meetLocation);
+
+        currentLocation = tracking.getCurrentLocation(mContext, Integer.parseInt(trackableID));
+        tracking.setCurrentLocation(currentLocation);
+        finishTime = tracking.returnFinishTime(trackableID, meetTime);
+        tracking.setFinishTime(finishTime);
+        meetLocation = tracking.returnMeetLocation(trackableID, meetTime);
+        tracking.setMeetLocation(meetLocation);
 
         trackingList.add(position, tracking);
         trackingsListInfo.setTrackingList(trackingList);
