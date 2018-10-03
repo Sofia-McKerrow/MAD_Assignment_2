@@ -15,6 +15,7 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.AddTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.DistanceRetrieval;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 
 public class DisplayTrackingsListActivity extends AppCompatActivity {
@@ -46,9 +47,13 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
         addTracking = (Button) findViewById(R.id.addTracking);
         addTracking.setOnClickListener(new AddTrackingButtonController(this));
 
-        for (int i = 0; i < trackingList.size(); i++) {
-            Log.i("MyTag", trackingList.get(i).toString());
-        }
+        DistanceRetrieval dr = new DistanceRetrieval(this);
+        String from = "-37.820666,144.958277";
+        String to = "-37.810045,144.964220";
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + from + "&destinations=" + to +
+                "&mode=walking&key=AIzaSyCIlpb8-g9K3ogJ0ptkp6_p45DkwuWAd28";
+        dr.execute(url);
+
     }
 
     public static TrackingAdapter getAdapter() {
