@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Australian Bird Tracker</string>
+    <string name="trackables_list_name">Trackables List</string>
     <string name="filter">Filter by category</string>
     <string-array name="categories">
         <item>All</item>
@@ -9,6 +10,10 @@
         <item>Sea Bird</item>
         <item>Water Bird</item>
     </string-array>
+    <string name="next_available_tracking">Next available tracking</string>
+    <string name="dialog_add_tracking">Add Tracking</string>
+    <string name="dialog_next_tracking">Next Tracking</string>
+    <string name="dialog_cancel">Cancel</string>
     <string name="trackings_list_name">Trackings List</string>
     <string name="add_tracking">Add tracking</string>
     <string name="trackable">Trackable</string>
@@ -42,5 +47,7 @@
         <item>05/07/2018 1:55:00 PM</item>
     </string-array>
     <string name="title_activity_edit_tracking">EditTrackingActivity</string>
+    <string name="suggest_tracking">Suggest Tracking</string>
+    <string name="settings">Settings</string>
 
 </resources>

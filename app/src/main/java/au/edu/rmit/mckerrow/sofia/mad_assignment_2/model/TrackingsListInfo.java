@@ -25,7 +25,7 @@ public class TrackingsListInfo {
         return TrackingLazyHolder.INSTANCE;
     }
 
-    public static TrackingsListInfo getTrackableInfo() {
+    public static TrackingsListInfo getTrackingInfo() {
         // Check if a singleton object has been created
         if (trackingsListInfo == null) {
             trackingsListInfo = new TrackingsListInfo();

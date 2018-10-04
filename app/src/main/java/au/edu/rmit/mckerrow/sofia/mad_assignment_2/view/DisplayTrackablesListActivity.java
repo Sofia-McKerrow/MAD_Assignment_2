@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.Collections;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.SuggestTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
@@ -27,6 +29,7 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     private static TrackableAdapter adapter;
     private DataSource mDataSource;
     private RecyclerView recyclerView;
+    private Button suggestTracking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +52,15 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
             }
         });
 
-//        trackableList = mDataSource.getAllTrackables();
-//
         adapter = new TrackableAdapter(this, trackableList);
+
+        suggestTracking = (Button) findViewById(R.id.suggestTracking);
+        suggestTracking.setOnClickListener(new SuggestTrackingButtonController(this, this));
 
         recyclerView = (RecyclerView) findViewById(R.id.rvTrackables);
         recyclerView.setAdapter(adapter);
 
         setUpSpinner();
-
-        TestTrackingService.test(this);
     }
 
     // Set category names in spinner

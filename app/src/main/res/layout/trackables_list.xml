@@ -12,6 +12,31 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/trackablesListName"
+                android:layout_width="233dp"
+                android:layout_height="37dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="@string/trackables_list_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/label_text_size" />
+
+            <Button
+                android:id="@+id/suggestTracking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/trackablesListName"
+                android:text="@string/suggest_tracking"
+                android:textSize="@dimen/button_text_size"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -11,10 +11,15 @@
     <dimen name="route_info_layout_width">150dp</dimen>
     <dimen name="route_info_layout_height">150dp</dimen>
     <dimen name="label_text_size">18sp</dimen>
+    <dimen name="button_text_size">14sp</dimen>
     <dimen name="spinner_text_size">20sp</dimen>
     <dimen name="tracking_text_size">18dp</dimen>
     <dimen name="tracking_item_text_size">15dp</dimen>
     <dimen name="table_padding">3dip</dimen>
+    <dimen name="dialog_text_size">16sp</dimen>
+    <dimen name="dialog_margin">10dp</dimen>
+    <dimen name="dialog_button_width">0dp</dimen>
+    <dimen name="dialog_button_height">1</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
 </resources>

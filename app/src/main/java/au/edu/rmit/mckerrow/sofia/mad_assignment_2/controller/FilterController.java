@@ -25,8 +25,6 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
     private String category;
     private TrackableAdapter adapter;
 
-    private static final String LOG_TAG = "MyTag";
-
     public FilterController(Context mContext) {
         this.mContext = mContext;
     }
