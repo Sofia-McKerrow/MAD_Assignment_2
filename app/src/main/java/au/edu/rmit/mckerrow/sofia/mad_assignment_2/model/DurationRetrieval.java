@@ -15,11 +15,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class DistanceRetrieval extends AsyncTask<String, Void, String> {
+public class DurationRetrieval extends AsyncTask<String, Void, String> {
     Context mContext;
+    String duration;
 
-    public DistanceRetrieval(Context mContext) {
+    public DurationRetrieval(Context mContext) {
         this.mContext = mContext;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        setDuration(duration);
     }
 
     @Override
@@ -42,30 +49,29 @@ public class DistanceRetrieval extends AsyncTask<String, Void, String> {
                 }
                 String json = sb.toString();
                 Log.d("JSON",json);
-                JSONObject root = new JSONObject(json);
-                JSONArray array_rows=root.getJSONArray("rows");
-                Log.d("JSON","array_rows:" + array_rows);
-                JSONObject object_rows = array_rows.getJSONObject(0);
-                Log.d("JSON","object_rows:" + object_rows);
-                JSONArray array_elements=object_rows.getJSONArray("elements");
-                Log.d("JSON","array_elements:" + array_elements);
-                JSONObject  object_elements=array_elements.getJSONObject(0);
-                Log.d("JSON","object_elements:" + object_elements);
-                JSONObject object_duration = object_elements.getJSONObject("duration");
-                JSONObject object_distance = object_elements.getJSONObject("distance");
 
-                Log.d("JSON","object_duration:" + object_duration);
-                return object_duration.getString("value") + "," + object_distance.getString("value");
+                // Get duration value in minutes from JSON object
+                JSONObject jsonDuration = new JSONObject(json).getJSONArray("rows").getJSONObject(0).getJSONArray ("elements")
+                        .getJSONObject(0).getJSONObject("duration");
+                duration = jsonDuration.get("text").toString();
+                Log.i("JSON", "Duration " + duration);
+//                duration = jsonDuration.get("value").toString();
+//                Log.i("JSON", "Duration " + duration);
 
+                return duration;
             }
-        } catch (MalformedURLException e) {
-            Log.d("error", "error1");
-        } catch (IOException e) {
-            Log.d("error", "error2");
-        } catch (JSONException e) {
-            Log.d("error","error3");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

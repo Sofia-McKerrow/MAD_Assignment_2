@@ -217,7 +217,6 @@ public abstract class AbstractTracking {
             DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
             SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy h:mm:ss a", Locale.ENGLISH);
             String searchDate = sdf.format(new Date());
-//            String searchDate = "05/07/2018 1:05:00 PM";
             int searchWindow = 5; // +/- 5 mins
             Date date = dateFormat.parse(searchDate);
             matched = trackingService.getTrackingInfoForTimeRange(date, searchWindow, 0);
@@ -257,25 +256,25 @@ public abstract class AbstractTracking {
     public String returnFinishTime(String trackableId, String meet) {
         String finish = null;
         if (trackableId.equals("1") && meet.equals("05/07/2018 1:10:00 PM")) {
-            finish = "05/07/2018 1:15:00 PM";
+            finish = "10/10/2018 1:15:00 PM";
         }
         else if (trackableId.equals("1") && meet.equals("05/07/2018 1:30:00 PM")) {
-            finish = "05/07/2018 1:40:00 PM";
+            finish = "10/10/2018 1:40:00 PM";
         }
         else if (trackableId.equals("2") && meet.equals("05/07/2018 1:10:00 PM")) {
-            finish = "05/07/2018 1:15:00 PM";
+            finish = "10/10/2018 1:15:00 PM";
         }
         else if (trackableId.equals("2") && meet.equals("05/07/2018 1:35:00 PM")) {
-            finish = "05/07/2018 1:45:00 PM";
+            finish = "10/10/2018 1:45:00 PM";
         }
         else if (trackableId.equals("3") && meet.equals("05/07/2018 1:30:00 PM")) {
-            finish = "05/07/2018 1:40:00 PM";
+            finish = "10/10/2018 1:40:00 PM";
         }
         else if (trackableId.equals("3") && meet.equals("05/07/2018 1:55:00 PM")) {
-            finish = "05/07/2018 2:00:00 PM";
+            finish = "10/10/2018 2:00:00 PM";
         }
         else {
-            finish = "05/07/2018 1:15:00 PM";
+            finish = "10/10/2018 1:15:00 PM";
         }
 
         return finish;
@@ -283,22 +282,22 @@ public abstract class AbstractTracking {
 
     public String returnMeetLocation(String trackableId, String meet) {
         String location = null;
-        if (trackableId.equals("1") && meet.equals("05/07/2018 1:10:00 PM")) {
+        if (trackableId.equals("1") && meet.equals("10/10/2018 1:10:00 PM")) {
             location = "-37.810828, 144.947005";
         }
-        else if (trackableId.equals("1") && meet.equals("05/07/2018 1:30:00 PM")) {
+        else if (trackableId.equals("1") && meet.equals("10/10/2018 1:30:00 PM")) {
             location = "-37.809548, 144.954993";
         }
-        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:10:00 PM")) {
+        else if (trackableId.equals("2") && meet.equals("10/10/2018 1:10:00 PM")) {
             location = "-37.820666, 144.958277";
         }
-        else if (trackableId.equals("2") && meet.equals("05/07/2018 1:35:00 PM")) {
+        else if (trackableId.equals("2") && meet.equals("10/10/2018 1:35:00 PM")) {
             location = "-37.810045, 144.964220";
         }
-        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:30:00 PM")) {
+        else if (trackableId.equals("3") && meet.equals("10/10/2018 1:30:00 PM")) {
             location = "-37.810045, 144.964220";
         }
-        else if (trackableId.equals("3") && meet.equals("05/07/2018 1:55:00 PM")) {
+        else if (trackableId.equals("3") && meet.equals("10/10/2018 1:55:00 PM")) {
             location = "-37.810828, 144.947005";
         }
         else {

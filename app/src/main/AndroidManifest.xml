@@ -24,8 +24,7 @@
         </activity>
         <activity android:name=".view.DisplayTrackingsListActivity" />
         <activity
-            android:name=".view.TabWidgetActivity"
-            android:theme="@style/TabWidgetTheme">
+            android:name=".view.TabWidgetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
