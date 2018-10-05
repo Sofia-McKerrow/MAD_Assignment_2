@@ -15,18 +15,23 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
+
 public class DurationRetrieval extends AsyncTask<String, Void, String> {
-    Context mContext;
-    String duration;
+    private Context mContext;
+    public DataRetrieval delegate;
 
     public DurationRetrieval(Context mContext) {
         this.mContext = mContext;
+//        retrieval = (DataRetrieval) mContext;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        setDuration(duration);
+        if (s!= null) {
+            delegate.setDuration(s);
+        }
     }
 
     @Override
@@ -53,12 +58,9 @@ public class DurationRetrieval extends AsyncTask<String, Void, String> {
                 // Get duration value in minutes from JSON object
                 JSONObject jsonDuration = new JSONObject(json).getJSONArray("rows").getJSONObject(0).getJSONArray ("elements")
                         .getJSONObject(0).getJSONObject("duration");
-                duration = jsonDuration.get("text").toString();
-                Log.i("JSON", "Duration " + duration);
-//                duration = jsonDuration.get("value").toString();
-//                Log.i("JSON", "Duration " + duration);
-
-                return duration;
+                String durationInMins = jsonDuration.getString("text");
+                String durationInSeconds = jsonDuration.getString("value");
+                return durationInMins + "," + durationInSeconds;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,11 +69,7 @@ public class DurationRetrieval extends AsyncTask<String, Void, String> {
         return null;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public interface DataRetrieval{
+        public void setDuration(String min);
     }
 }

@@ -46,14 +46,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
         addTracking = (Button) findViewById(R.id.addTracking);
         addTracking.setOnClickListener(new AddTrackingButtonController(this));
-
-        DurationRetrieval dr = new DurationRetrieval(this);
-        String from = "-37.807425,144.963814";
-        String to = "-37.810045,144.964220";
-        String key = "AIzaSyCIlpb8-g9K3ogJ0ptkp6_p45DkwuWAd28";
-        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + from + "&destinations=" + to +
-                "&mode=walking&key=" + key;
-        dr.execute(url);
     }
 
     public static TrackingAdapter getAdapter() {
