@@ -15,23 +15,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.SuggestTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
 
 public class DurationRetrieval extends AsyncTask<String, Void, String> {
     private Context mContext;
-    public DataRetrieval delegate;
 
     public DurationRetrieval(Context mContext) {
         this.mContext = mContext;
-//        retrieval = (DataRetrieval) mContext;
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        if (s!= null) {
-            delegate.setDuration(s);
-        }
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
     }
 
     @Override
@@ -53,14 +49,15 @@ public class DurationRetrieval extends AsyncTask<String, Void, String> {
                     line = br.readLine();
                 }
                 String json = sb.toString();
-                Log.d("JSON",json);
+//                Log.d("JSON",json);
 
                 // Get duration value in minutes from JSON object
                 JSONObject jsonDuration = new JSONObject(json).getJSONArray("rows").getJSONObject(0).getJSONArray ("elements")
                         .getJSONObject(0).getJSONObject("duration");
                 String durationInMins = jsonDuration.getString("text");
                 String durationInSeconds = jsonDuration.getString("value");
-                return durationInMins + "," + durationInSeconds;
+//                return durationInMins + "," + durationInSeconds;
+                return durationInMins;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,7 +66,4 @@ public class DurationRetrieval extends AsyncTask<String, Void, String> {
         return null;
     }
 
-    public interface DataRetrieval{
-        public void setDuration(String min);
-    }
 }

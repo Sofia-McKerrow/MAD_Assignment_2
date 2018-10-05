@@ -14,6 +14,7 @@ import java.util.Map;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackablesListInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TrackableAdapter;
 
@@ -24,6 +25,7 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
     private static List<BirdTrackable> filteredList;
     private String category;
     private TrackableAdapter adapter;
+    private TrackablesListInfo trackablesListInfo;
 
     public FilterController(Context mContext) {
         this.mContext = mContext;
@@ -42,6 +44,8 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
 
         ReadFile.readTrackableFile(mContext);
         trackableList = ReadFile.getTrackableList();
+
+        trackablesListInfo = TrackablesListInfo.getSingletonInstance(mContext);
 
         // Remove duplicate entries from trackableList so only entries with an unique trackableID are in the list
         // Prevents bug where entries display twice when one of the categories in the filter spinner is first selected
@@ -64,6 +68,7 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
             // If All is selected
             case 0:
                 filteredList.addAll(trackableList);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
 
                 break;
@@ -71,18 +76,16 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
                 // If Bird of Prey category is selected
                 category = "Bird of Prey";
                 filteredList = filterTrackableList(trackableList, category);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
 
-                Log.i("MyTag", "Bird of prey has been selected");
-//                for (int i = 0; i < trackableList.size(); i++) {
-//                    Log.i("MyTag", "TrackableList " + trackableList.get(i).getName());
-//                }
                 break;
 
             case 2:
                 // If Bush Bird category is selected
                 category = "Bush Bird";
                 filteredList = filterTrackableList(trackableList, category);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
                 break;
 
@@ -90,6 +93,7 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
                 // If Parrot category is selected
                 category = "Parrot";
                 filteredList = filterTrackableList(trackableList, category);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
                 break;
 
@@ -97,6 +101,7 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
                 // If Sea Bird category is selected
                 category = "Sea Bird";
                 filteredList = filterTrackableList(trackableList, category);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
                 break;
 
@@ -104,6 +109,7 @@ public class FilterController implements AdapterView.OnItemSelectedListener {
                 // If Water Bird category is selected
                 category = "Water Bird";
                 filteredList = filterTrackableList(trackableList, category);
+                trackablesListInfo.setTrackableList(trackableList);
                 adapter.notifyDataSetChanged();
                 break;
         }
