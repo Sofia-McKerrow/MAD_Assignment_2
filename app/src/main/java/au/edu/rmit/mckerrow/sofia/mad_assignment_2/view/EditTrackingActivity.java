@@ -90,11 +90,6 @@ public class EditTrackingActivity extends AppCompatActivity implements AdapterVi
         }
 
         trackableSpinner.setOnItemSelectedListener(this);
-
-//        Spinner meetDateSpinner = (Spinner) findViewById(R.id.editMeetDateSpinner);
-//        ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates, android.R.layout.simple_spinner_item);
-//        arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        meetDateSpinner.setAdapter(arrayAdapterDate);
     }
 
     // Get the selected tracking

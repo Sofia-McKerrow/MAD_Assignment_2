@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +28,8 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
     private TrackingsListInfo trackingsListInfo;
     private List<BirdTracking> trackingList;
     private Button saveTracking;
+    private String trackableName;
+    private String trackingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,27 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
         ArrayAdapter<CharSequence> arrayAdapterName = ArrayAdapter.createFromResource(this, R.array.spinner_trackables, android.R.layout.simple_spinner_item);
         arrayAdapterName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         trackableSpinner.setAdapter(arrayAdapterName);
+
+        if (getIntent().getExtras() != null) {
+            trackableName = getIntent().getExtras().getString("trackable_name_key");
+
+            // Display the name of the selected tracking in the spinner
+            if (trackableName.equals("Australian Magpie")) {
+                trackableSpinner.setSelection(0);
+            }
+            else if (trackableName.equals("Kookaburra")) {
+                trackableSpinner.setSelection(1);
+            }
+            else if (trackableName.equals("Sulphur-Crested Cockatoo")) {
+                trackableSpinner.setSelection(2);
+            }
+            else {
+                trackableSpinner.setSelection(0);
+            }
+        }
+
         trackableSpinner.setOnItemSelectedListener(this);
+
     }
 
     @Override
@@ -57,6 +80,7 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
         String trackable = trackableSpinner.getSelectedItem().toString();
 
         Spinner meetDateSpinner = (Spinner) findViewById(R.id.meetDateSpinner);
+        trackingTime = null;
 
         // If trackable Australian Magpie is selected, display the meet dates/times for this trackable in the meetDateSpinner
         if (trackable.contentEquals("Australian Magpie")) {
@@ -65,6 +89,18 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
             arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             arrayAdapterDate.notifyDataSetChanged();
             meetDateSpinner.setAdapter(arrayAdapterDate);
+
+            if (getIntent().getExtras() != null) {
+                trackingTime = getIntent().getExtras().getString("tracking_time_key");
+
+                if (trackingTime.equals("10/10/2018 1:10:00 PM")) {
+                    meetDateSpinner.setSelection(0);
+                } else if (trackingTime != null && trackingTime.equals("10/10/2018 1:30:00 PM")) {
+                    meetDateSpinner.setSelection(1);
+                } else {
+                    meetDateSpinner.setSelection(0);
+                }
+            }
         }
         // If trackable Kookaburra is selected, display the meet dates/times for this trackable in the meetDateSpinner
         else if (trackable.contentEquals("Kookaburra")) {
@@ -73,7 +109,22 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
             arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             arrayAdapterDate.notifyDataSetChanged();
             meetDateSpinner.setAdapter(arrayAdapterDate);
+
+            if (getIntent().getExtras() != null) {
+                trackingTime = getIntent().getExtras().getString("tracking_time_key");
+
+                if (trackingTime.equals("10/10/2018 1:10:00 PM")) {
+                    meetDateSpinner.setSelection(0);
+                }
+                else if (trackingTime.equals("10/10/2018 1:35:00 PM")) {
+                    meetDateSpinner.setSelection(1);
+                }
+                else {
+                    meetDateSpinner.setSelection(0);
+                }
+            }
         }
+
         // If trackable Sulphur-Crested Cockatoo is selected, display the meet dates/times for this trackable in the meetDateSpinner
         else if (trackable.contentEquals("Sulphur-Crested Cockatoo")) {
             ArrayAdapter<CharSequence> arrayAdapterDate = ArrayAdapter.createFromResource(this, R.array.meet_dates_cockatoo,

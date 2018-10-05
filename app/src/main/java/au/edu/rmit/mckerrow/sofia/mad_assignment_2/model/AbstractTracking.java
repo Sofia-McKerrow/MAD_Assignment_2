@@ -105,6 +105,7 @@ public abstract class AbstractTracking {
 
             if (id != trackableID) {
                 matched.remove(i);
+                i--;
             }
         }
 
