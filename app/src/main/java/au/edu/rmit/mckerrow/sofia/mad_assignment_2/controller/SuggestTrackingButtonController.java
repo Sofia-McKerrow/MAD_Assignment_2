@@ -3,9 +3,7 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -68,48 +66,52 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         String trackingDetails = getAvailableTrackings(mContext);
-        final String trackableName = trackingDetails.split(",")[0];
-        final String trackingTime = trackingDetails.split(",")[1];
 
-        nextTrackingDetails = (TextView) view.findViewById(R.id.next_tracking_details);
-        nextTrackingDetails.setText(trackableName + " " + trackingTime);
+        if (trackingDetails != null) {
+            final String trackableName = trackingDetails.split(",")[0];
+            final String trackingTime = trackingDetails.split(",")[1];
 
-        // Add available tracking to tracking list
-        addTracking = (Button) view.findViewById(R.id.dialog_add_tracking);
-        addTracking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, AddTrackingActivity.class);
-                intent.putExtra(TRACKABLE_NAME_KEY, trackableName);
-                intent.putExtra(TRACKING_TIME_KEY, trackingTime);
-                mContext.startActivity(intent);
+            nextTrackingDetails = (TextView) view.findViewById(R.id.next_tracking_details);
+            nextTrackingDetails.setText(trackableName + " " + trackingTime);
 
-                alertDialog.dismiss();
-            }
-        });
+            // Add available tracking to tracking list
+            addTracking = (Button) view.findViewById(R.id.dialog_add_tracking);
+            addTracking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, AddTrackingActivity.class);
+                    intent.putExtra(TRACKABLE_NAME_KEY, trackableName);
+                    intent.putExtra(TRACKING_TIME_KEY, trackingTime);
+                    mContext.startActivity(intent);
 
-        // Display next available tracking in dialog
-        nextTracking = (Button) view.findViewById(R.id.dialog_next_tracking);
-        nextTracking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"You clicked next tracking button",Toast.LENGTH_LONG).show();
-                getNextTracking();
-                alertDialog.dismiss();
-            }
-        });
+                    alertDialog.dismiss();
+                }
+            });
 
-        // Return to trackables list activity
-        cancel = (Button) view.findViewById(R.id.dialog_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"You clicked cancel button",Toast.LENGTH_LONG).show();
-                alertDialog.dismiss();
-            }
-        });
+            // Display next available tracking in dialog
+            nextTracking = (Button) view.findViewById(R.id.dialog_next_tracking);
+            nextTracking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getNextTracking();
+                    alertDialog.dismiss();
+                }
+            });
 
-        alertDialog.show();
+            // Return to trackables list activity
+            cancel = (Button) view.findViewById(R.id.dialog_cancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+
+            alertDialog.show();
+        }
+        else {
+            Toast.makeText(mContext,"No suggested trackings available",Toast.LENGTH_LONG).show();
+        }
     }
 
     public String getAvailableTrackings(Context context) {
@@ -140,29 +142,29 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         availableTrackings = getTrackingWhichCanBeReachedInTime(trackings);
 
         // Get first available tracking
-        if (availableTrackings != null) {
+        if (availableTrackings.size() != 0) {
             TrackingService.TrackingInfo tracking = availableTrackings.get(count);
             count++;
 
-        String trackableID = tracking.toString();
-        trackableID = trackableID.replace(" trackableId=", "");
-        trackableID = trackableID.split(",")[1];
-        String trackableName = null;
-        if (trackableID.equals("1")) {
-            trackableName = "Australian Magpie";
-        }
-        else if (trackableID.equals("2")) {
-            trackableName = "Kookaburra";
-        }
-        else if (trackableID.equals("3")) {
-            trackableName = "Sulphur-Crested Cockatoo";
-        }
+            String trackableID = tracking.toString();
+            trackableID = trackableID.replace(" trackableId=", "");
+            trackableID = trackableID.split(",")[1];
+            String trackableName = null;
+            if (trackableID.equals("1")) {
+                trackableName = "Australian Magpie";
+            }
+            else if (trackableID.equals("2")) {
+                trackableName = "Kookaburra";
+            }
+            else if (trackableID.equals("3")) {
+                trackableName = "Sulphur-Crested Cockatoo";
+            }
 
-        String trackingTime = tracking.toString();
-        trackingTime = trackingTime.replace("Date/Time=", "");
-        trackingTime = trackingTime.split(",")[0];
+            String trackingTime = tracking.toString();
+            trackingTime = trackingTime.replace("Date/Time=", "");
+            trackingTime = trackingTime.split(",")[0];
 
-        details = trackableName + "," + trackingTime;
+            details = trackableName + "," + trackingTime;
         }
 
         return details;
@@ -309,6 +311,7 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         {
             e.printStackTrace();
         }
+
 
         return matched;
     }
