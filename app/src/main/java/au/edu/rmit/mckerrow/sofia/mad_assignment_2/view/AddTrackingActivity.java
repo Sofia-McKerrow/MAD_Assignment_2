@@ -94,9 +94,9 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
                 trackingTime = getIntent().getExtras().getString("tracking_time_key");
                 String time = trackingTime.split(" ")[1];
 
-                if (trackingTime.equals("1:10:00")) {
+                if (time.equals("1:10:00")) {
                     meetDateSpinner.setSelection(0, true);
-                } else if (trackingTime != null && trackingTime.equals("1:30:00")) {
+                } else if (time.equals("1:30:00")) {
                     meetDateSpinner.setSelection(1, true);
                 } else {
                     meetDateSpinner.setSelection(0, true);

@@ -46,6 +46,9 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
     private Button nextTracking;
     private Button cancel;
     private String duration;
+    private String trackingDetails;
+    private String trackableName;
+    private String trackingTime;
     private int count;
     public static final String TRACKABLE_NAME_KEY = "trackable_name_key";
     public static final String TRACKING_TIME_KEY = "tracking_time_key";
@@ -67,11 +70,12 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         alertDialogBuilder.setView(view);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
-        String trackingDetails = getAvailableTrackings(mContext);
+        availableTrackings = getAvailableTrackingsList(mContext);
 
-        if (trackingDetails != null) {
-            final String trackableName = trackingDetails.split(",")[0];
-            final String trackingTime = trackingDetails.split(",")[1];
+        if (availableTrackings.size() != 0) {
+            trackingDetails = getAvailableTracking(availableTrackings);
+            trackableName = trackingDetails.split(",")[0];
+            trackingTime = trackingDetails.split(",")[1];
 
             nextTrackingDetails = (TextView) view.findViewById(R.id.next_tracking_details);
             nextTrackingDetails.setText(trackableName + " " + trackingTime);
@@ -95,9 +99,12 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
             nextTracking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"You clicked next tracking button",Toast.LENGTH_LONG).show();
-                    getNextTracking();
-                    alertDialog.dismiss();
+                    trackingDetails = getNextTracking(availableTrackings);
+                    if (trackingDetails != null) {
+                        trackableName = trackingDetails.split(",")[0];
+                        trackingTime = trackingDetails.split(",")[1];
+                        nextTrackingDetails.setText(trackableName + " " + trackingTime);
+                    }
                 }
             });
 
@@ -106,7 +113,6 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"You clicked cancel button",Toast.LENGTH_LONG).show();
                     alertDialog.dismiss();
                 }
             });
@@ -116,11 +122,9 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         else {
             Toast.makeText(mContext,"No suggested trackings available",Toast.LENGTH_LONG).show();
         }
-
     }
 
-    public String getAvailableTrackings(Context context) {
-        String details = null;
+    public List<TrackingService.TrackingInfo> getAvailableTrackingsList(Context context) {
         availableTrackings = new ArrayList<>();
         trackablesListInfo = TrackablesListInfo.getSingletonInstance(mContext);
         filteredList = trackablesListInfo.getTrackableList();
@@ -146,38 +150,79 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         // Get trackings which can be reached during its stationary period from current location
         availableTrackings = getTrackingWhichCanBeReachedInTime(trackings);
 
+        return availableTrackings;
+    }
+
+    public String getAvailableTracking(List<TrackingService.TrackingInfo> trackings) {
+        String details = null;
+
         // Get first available tracking
-        if (availableTrackings.size() != 0) {
-            TrackingService.TrackingInfo tracking = availableTrackings.get(count);
+        if (trackings.size() != 0) {
+            TrackingService.TrackingInfo tracking = trackings.get(count);
             count++;
 
-        String trackableID = tracking.toString();
-        trackableID = trackableID.replace(" trackableId=", "");
-        trackableID = trackableID.split(",")[1];
-        String trackableName = null;
-        if (trackableID.equals("1")) {
-            trackableName = "Australian Magpie";
-        }
-        else if (trackableID.equals("2")) {
-            trackableName = "Kookaburra";
-        }
-        else if (trackableID.equals("3")) {
-            trackableName = "Sulphur-Crested Cockatoo";
-        }
+            String trackableID = tracking.toString();
+            trackableID = trackableID.replace(" trackableId=", "");
+            trackableID = trackableID.split(",")[1];
+            String trackableName = null;
+            if (trackableID.equals("1")) {
+                trackableName = "Australian Magpie";
+            }
+            else if (trackableID.equals("2")) {
+                trackableName = "Kookaburra";
+            }
+            else if (trackableID.equals("3")) {
+                trackableName = "Sulphur-Crested Cockatoo";
+            }
 
-        String trackingTime = tracking.toString();
-        trackingTime = trackingTime.replace("Date/Time=", "");
-        trackingTime = trackingTime.split(",")[0];
+            String trackingTime = tracking.toString();
+            trackingTime = trackingTime.replace("Date/Time=", "");
+            trackingTime = trackingTime.split(",")[0];
 
-        details = trackableName + "," + trackingTime;
+            details = trackableName + "," + trackingTime;
         }
 
         return details;
-
     }
 
-    public void getNextTracking() {
 
+
+    public String getNextTracking(List<TrackingService.TrackingInfo> trackings) {
+        String next = null;
+
+        if (trackings.size() != 0) {
+            if (count < trackings.size()) {
+                TrackingService.TrackingInfo tracking = trackings.get(count);
+                count++;
+
+                if (tracking != null) {
+                    String trackableID = tracking.toString();
+                    trackableID = trackableID.replace(" trackableId=", "");
+                    trackableID = trackableID.split(",")[1];
+                    String trackableName = null;
+                    if (trackableID.equals("1")) {
+                        trackableName = "Australian Magpie";
+                    }
+                    else if (trackableID.equals("2")) {
+                        trackableName = "Kookaburra";
+                    }
+                    else if (trackableID.equals("3")) {
+                        trackableName = "Sulphur-Crested Cockatoo";
+                    }
+
+                    String trackingTime = tracking.toString();
+                    trackingTime = trackingTime.replace("Date/Time=", "");
+                    trackingTime = trackingTime.split(",")[0];
+
+                    next = trackableName + "," + trackingTime;
+                }
+            }
+            else {
+                Toast.makeText(mContext,"No other suggested trackings available",Toast.LENGTH_LONG).show();
+            }
+        }
+
+        return next;
     }
 
     // Get duration values from distance matrix api request in DurationRetrieval class
