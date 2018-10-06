@@ -68,48 +68,55 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         final AlertDialog alertDialog = alertDialogBuilder.create();
 
         String trackingDetails = getAvailableTrackings(mContext);
-        final String trackableName = trackingDetails.split(",")[0];
-        final String trackingTime = trackingDetails.split(",")[1];
 
-        nextTrackingDetails = (TextView) view.findViewById(R.id.next_tracking_details);
-        nextTrackingDetails.setText(trackableName + " " + trackingTime);
+        if (trackingDetails != null) {
+            final String trackableName = trackingDetails.split(",")[0];
+            final String trackingTime = trackingDetails.split(",")[1];
 
-        // Add available tracking to tracking list
-        addTracking = (Button) view.findViewById(R.id.dialog_add_tracking);
-        addTracking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, AddTrackingActivity.class);
-                intent.putExtra(TRACKABLE_NAME_KEY, trackableName);
-                intent.putExtra(TRACKING_TIME_KEY, trackingTime);
-                mContext.startActivity(intent);
+            nextTrackingDetails = (TextView) view.findViewById(R.id.next_tracking_details);
+            nextTrackingDetails.setText(trackableName + " " + trackingTime);
 
-                alertDialog.dismiss();
-            }
-        });
+            // Add available tracking to tracking list
+            addTracking = (Button) view.findViewById(R.id.dialog_add_tracking);
+            addTracking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, AddTrackingActivity.class);
+                    intent.putExtra(TRACKABLE_NAME_KEY, trackableName);
+                    intent.putExtra(TRACKING_TIME_KEY, trackingTime);
+                    mContext.startActivity(intent);
 
-        // Display next available tracking in dialog
-        nextTracking = (Button) view.findViewById(R.id.dialog_next_tracking);
-        nextTracking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"You clicked next tracking button",Toast.LENGTH_LONG).show();
-                getNextTracking();
-                alertDialog.dismiss();
-            }
-        });
+                    alertDialog.dismiss();
+                }
+            });
 
-        // Return to trackables list activity
-        cancel = (Button) view.findViewById(R.id.dialog_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"You clicked cancel button",Toast.LENGTH_LONG).show();
-                alertDialog.dismiss();
-            }
-        });
+            // Display next available tracking in dialog
+            nextTracking = (Button) view.findViewById(R.id.dialog_next_tracking);
+            nextTracking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext,"You clicked next tracking button",Toast.LENGTH_LONG).show();
+                    getNextTracking();
+                    alertDialog.dismiss();
+                }
+            });
 
-        alertDialog.show();
+            // Return to trackables list activity
+            cancel = (Button) view.findViewById(R.id.dialog_cancel);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext,"You clicked cancel button",Toast.LENGTH_LONG).show();
+                    alertDialog.dismiss();
+                }
+            });
+
+            alertDialog.show();
+        }
+        else {
+            Toast.makeText(mContext,"No suggested trackings available",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public String getAvailableTrackings(Context context) {
@@ -140,7 +147,7 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
         availableTrackings = getTrackingWhichCanBeReachedInTime(trackings);
 
         // Get first available tracking
-        if (availableTrackings != null) {
+        if (availableTrackings.size() != 0) {
             TrackingService.TrackingInfo tracking = availableTrackings.get(count);
             count++;
 
