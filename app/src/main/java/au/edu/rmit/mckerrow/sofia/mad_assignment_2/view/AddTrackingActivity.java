@@ -92,13 +92,14 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
 
             if (getIntent().getExtras() != null) {
                 trackingTime = getIntent().getExtras().getString("tracking_time_key");
+                String time = trackingTime.split(" ")[1];
 
-                if (trackingTime.equals("10/10/2018 1:10:00 PM")) {
-                    meetDateSpinner.setSelection(0);
-                } else if (trackingTime != null && trackingTime.equals("10/10/2018 1:30:00 PM")) {
-                    meetDateSpinner.setSelection(1);
+                if (trackingTime.equals("1:10:00")) {
+                    meetDateSpinner.setSelection(0, true);
+                } else if (trackingTime != null && trackingTime.equals("1:30:00")) {
+                    meetDateSpinner.setSelection(1, true);
                 } else {
-                    meetDateSpinner.setSelection(0);
+                    meetDateSpinner.setSelection(0, true);
                 }
             }
         }
@@ -112,15 +113,16 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
 
             if (getIntent().getExtras() != null) {
                 trackingTime = getIntent().getExtras().getString("tracking_time_key");
+                String time = trackingTime.split(" ")[1];
 
-                if (trackingTime.equals("10/10/2018 1:10:00 PM")) {
-                    meetDateSpinner.setSelection(0);
+                if (time.equals("1:10:00")) {
+                    meetDateSpinner.setSelection(0, true);
                 }
-                else if (trackingTime.equals("10/10/2018 1:35:00 PM")) {
-                    meetDateSpinner.setSelection(1);
+                else if (time.equals("1:35:00")) {
+                    meetDateSpinner.setSelection(1, true);
                 }
                 else {
-                    meetDateSpinner.setSelection(0);
+                    meetDateSpinner.setSelection(0, true);
                 }
             }
         }
@@ -132,6 +134,21 @@ public class AddTrackingActivity extends AppCompatActivity implements AdapterVie
             arrayAdapterDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             arrayAdapterDate.notifyDataSetChanged();
             meetDateSpinner.setAdapter(arrayAdapterDate);
+
+            if (getIntent().getExtras() != null) {
+                trackingTime = getIntent().getExtras().getString("tracking_time_key");
+                String time = trackingTime.split(" ")[1];
+
+                if (time.equals("1:30:00")) {
+                    meetDateSpinner.setSelection(0, true);
+                }
+                else if (time.equals("1:55:00")) {
+                    meetDateSpinner.setSelection(1, true);
+                }
+                else {
+                    meetDateSpinner.setSelection(0, true);
+                }
+            }
         }
     }
 

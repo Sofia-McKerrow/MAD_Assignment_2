@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,15 +19,19 @@ import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.FilterController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.SuggestTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTracking;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.ReadFile;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackablesListInfo;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.TrackingsListInfo;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.TestTrackingService;
 
 public class DisplayTrackablesListActivity extends AppCompatActivity {
 
     private static List<BirdTrackable> trackableList;
+    private static List<BirdTracking> trackingList;
     private static Map<String, BirdTrackable> trackableMap;
     private TrackablesListInfo trackablesListInfo;
+    private TrackingsListInfo trackingsListInfo;
     private static TrackableAdapter adapter;
     private DataSource mDataSource;
     private RecyclerView recyclerView;
@@ -36,6 +41,9 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackables_list);
+
+        mDataSource = new DataSource(this);
+        mDataSource.open();
 
         updateTrackablesDB();
 
@@ -52,6 +60,10 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+
+        updateTrackingsDB();
+        trackingList = mDataSource.getAllTrackings();
+        updateTrackingInfoList(trackingList);
 
         adapter = new TrackableAdapter(this, trackableList);
 
@@ -94,9 +106,6 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     }
 
     public void updateTrackablesDB() {
-        mDataSource = new DataSource(this);
-        mDataSource.open();
-
         if (trackableList != null) {
             trackableList.clear();
         }
@@ -105,6 +114,33 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
 
         // Insert the data from the trackable list into the trackables table in the database
         mDataSource.seedDatabaseWithTrackables(trackableList);
+    }
+
+    public void updateTrackingsDB() {
+        // Check if a trackingsListInfo singleton has been created
+        if (trackingsListInfo == null) {
+            trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
+        }
+
+        trackingList = trackingsListInfo.getTrackingList();
+
+        if (trackingList == null) {
+            trackingList = new ArrayList<BirdTracking>();
+        }
+
+        // Insert the data from the tracking list into the trackings table in the database
+        mDataSource.seedDatabaseWithTrackings(trackingList);
+    }
+
+    public void updateTrackingInfoList(List<BirdTracking> trackings) {
+        trackings = mDataSource.getAllTrackings();
+
+        // Check if a trackingsListInfo singleton has been created
+        if (trackingsListInfo == null) {
+            trackingsListInfo = TrackingsListInfo.getSingletonInstance(this);
+        }
+        // Set the tracking list to the trackingsListInfo singleton
+        trackingsListInfo.setTrackingList(trackings);
     }
 
 }
