@@ -93,6 +93,7 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
             nextTracking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(mContext,"You clicked next tracking button",Toast.LENGTH_LONG).show();
                     getNextTracking();
                     alertDialog.dismiss();
                 }
