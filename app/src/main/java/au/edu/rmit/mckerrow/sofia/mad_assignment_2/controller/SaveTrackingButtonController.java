@@ -9,6 +9,7 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
@@ -54,8 +55,7 @@ public class SaveTrackingButtonController implements View.OnClickListener{
             trackingList = new ArrayList<BirdTracking>();
         }
 
-        int temp = trackingList.size() + 1;
-        String trackingID = "tr" + temp;
+        String trackingID = UUID.randomUUID().toString();
 
         String trackableID = null;
         Spinner trackableSpinner = (Spinner) activity.findViewById(R.id.trackableNameSpinner);
