@@ -41,6 +41,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.DisplayTrackingsListActivity" />
         </activity>
+        <service android:name="au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.SuggestTrackingService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>

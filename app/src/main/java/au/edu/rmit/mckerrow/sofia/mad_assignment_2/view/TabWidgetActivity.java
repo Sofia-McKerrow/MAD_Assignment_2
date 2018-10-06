@@ -1,5 +1,8 @@
 package au.edu.rmit.mckerrow.sofia.mad_assignment_2.view;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
@@ -9,6 +12,7 @@ import java.util.List;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.SuggestTrackingService;
 
 public class TabWidgetActivity extends android.app.TabActivity {
 
