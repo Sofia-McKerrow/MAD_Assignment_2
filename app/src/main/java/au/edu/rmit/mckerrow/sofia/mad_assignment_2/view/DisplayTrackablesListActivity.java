@@ -68,14 +68,6 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         setUpSpinner();
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent alarmIntent = new Intent(this, SuggestTrackingService.class);
-
-        PendingIntent pending = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Calendar calendar = Calendar.getInstance();
-        long trigger = calendar.getTimeInMillis() + (30 * 1000);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, pending);
     }
 
     // Set category names in spinner
@@ -99,17 +91,6 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mDataSource.open();
-
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            Boolean displayDialog = intent.getExtras().getBoolean("show_dialog");
-
-            // Display suggest tracking dialog
-            if (displayDialog == true) {
-                SuggestTrackingDialog dialog = new SuggestTrackingDialog(this, this);
-                dialog.openDialog();
-            }
-        }
     }
 
     @Override

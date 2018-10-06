@@ -30,6 +30,7 @@ public class SuggestTrackingDialog {
 
     private Context mContext;
     private DisplayTrackablesListActivity activity;
+    private TabWidgetActivity tabWidgetActivity;
     private TrackablesListInfo trackablesListInfo;
     private List<BirdTrackable> filteredList;
     private List<TrackingService.TrackingInfo> availableTrackings;
@@ -50,10 +51,16 @@ public class SuggestTrackingDialog {
         this.activity = activity;
     }
 
+    public SuggestTrackingDialog(TabWidgetActivity mContext, TabWidgetActivity tabWidgetActivity) {
+        this.mContext = mContext;
+        this.tabWidgetActivity = tabWidgetActivity;
+    }
+
     public void openDialog() {
         count = 0;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
-        View view = activity.getLayoutInflater().inflate(R.layout.dialog, null);
+        View view = tabWidgetActivity.getLayoutInflater().inflate(R.layout.dialog, null);
+//        View view = activity.getLayoutInflater().inflate(R.layout.dialog, null);
         alertDialogBuilder.setView(view);
         final AlertDialog alertDialog = alertDialogBuilder.create();
 

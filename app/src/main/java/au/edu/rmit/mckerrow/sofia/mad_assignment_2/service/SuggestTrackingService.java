@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.DisplayTrackablesListActivity;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.SuggestTrackingDialog;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.view.TabWidgetActivity;
 
 public class SuggestTrackingService extends IntentService {
 
@@ -18,7 +19,7 @@ public class SuggestTrackingService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.d("MyTag", "Alarm...");
-        intent = new Intent(getBaseContext(), DisplayTrackablesListActivity.class);
+        intent = new Intent(getBaseContext(), TabWidgetActivity.class);
         intent.putExtra("show_dialog", true);
         getApplication().startActivity(intent);
     }
