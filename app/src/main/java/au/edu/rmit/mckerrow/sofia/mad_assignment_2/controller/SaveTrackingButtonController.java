@@ -42,7 +42,9 @@ public class SaveTrackingButtonController implements View.OnClickListener{
         addTracking(activity);
 
         adapter = DisplayTrackingsListActivity.getAdapter();
-        adapter.notifyDataSetChanged();
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
 
         mContext.startActivity(new Intent(mContext, TabWidgetActivity.class));
     }
