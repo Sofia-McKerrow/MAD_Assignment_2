@@ -103,6 +103,7 @@ public class SuggestTrackingButtonController implements View.OnClickListener {
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Toast.makeText(mContext,"You clicked cancel",Toast.LENGTH_LONG).show();
                     alertDialog.dismiss();
                 }
             });
