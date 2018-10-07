@@ -64,11 +64,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_trackables_list:
-                // Show the trackables list activity
-                Intent trackablesIntent = new Intent(this, DisplayTrackablesListActivity.class);
-                startActivity(trackablesIntent);
-                return true;
             case R.id.action_settings:
                 // Show the settings activity
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
@@ -97,12 +92,6 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
         }
 
         trackingList = trackingsListInfo.getTrackingList();
-
-        if (trackingList != null) {
-            for (int i = 0; i < trackingList.size(); i++) {
-                Log.i("MyTag", "Tracking list " + trackingList.get(i).toString());
-            }
-        }
 
         if (trackingList == null) {
             trackingList = new ArrayList<BirdTracking>();

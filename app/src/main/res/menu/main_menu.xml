@@ -3,19 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_trackables_list"
-        android:title="@string/trackables_list"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/action_trackings_list"
-        android:title="@string/trackings_list"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/action_settings"
         android:title="@string/settings"
-        app:showAsAction="never"
+        app:showAsAction="always"
         />
 
 </menu>

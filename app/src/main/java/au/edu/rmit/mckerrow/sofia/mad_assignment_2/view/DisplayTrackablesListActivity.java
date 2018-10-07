@@ -104,11 +104,6 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_trackings_list:
-                // Show the trackings list activity
-                Intent trackingsIntent = new Intent(this, DisplayTrackingsListActivity.class);
-                startActivity(trackingsIntent);
-                return true;
             case R.id.action_settings:
                 // Show the settings activity
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
@@ -119,42 +114,9 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        // Get the user specified frequency to display the suggest tracking dialog
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String prefFrequency = preferences.getString("frequency", "");
-        if (!prefFrequency.equals("")) {
-            int frequency = Integer.parseInt(prefFrequency);
-
-            if (frequency > 0) {
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent alarmIntent = new Intent(this, SuggestTrackingService.class);
-
-                PendingIntent pending = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                Calendar calendar = Calendar.getInstance();
-                long trigger = calendar.getTimeInMillis() + (frequency * 1000);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, pending);
-            }
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mDataSource.open();
-
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            Boolean displayDialog = intent.getExtras().getBoolean("show_dialog");
-
-            // Display suggest tracking dialog
-            if (displayDialog == true) {
-                SuggestTrackingDialog dialog = new SuggestTrackingDialog(this, this);
-                dialog.openDialog();
-            }
-        }
     }
 
     @Override
