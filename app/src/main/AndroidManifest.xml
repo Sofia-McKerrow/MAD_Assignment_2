@@ -23,8 +23,7 @@
                 android:value=".view.DisplayTrackablesListActivity" />
         </activity>
         <activity android:name=".view.DisplayTrackingsListActivity" />
-        <activity
-            android:name=".view.TabWidgetActivity">
+        <activity android:name=".view.TabWidgetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,9 +40,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.DisplayTrackingsListActivity" />
         </activity>
-        <service android:name="au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.SuggestTrackingService"
-            android:enabled="true">
-        </service>
+
+        <service
+            android:name=".service.SuggestTrackingService"
+            android:enabled="true"></service>
+
+        <activity android:name=".view.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.TabWidgetActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -51,7 +51,7 @@ public class SuggestTrackingDialog {
         this.activity = activity;
     }
 
-    public SuggestTrackingDialog(TabWidgetActivity mContext, TabWidgetActivity tabWidgetActivity) {
+    public SuggestTrackingDialog(Context mContext, TabWidgetActivity tabWidgetActivity) {
         this.mContext = mContext;
         this.tabWidgetActivity = tabWidgetActivity;
     }

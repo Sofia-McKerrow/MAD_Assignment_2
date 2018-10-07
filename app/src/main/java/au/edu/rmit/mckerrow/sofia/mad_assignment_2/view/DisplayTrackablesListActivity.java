@@ -4,14 +4,18 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -62,13 +66,16 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
 
         adapter = new TrackableAdapter(this, trackableList);
 
-        suggestTracking = (Button) findViewById(R.id.suggestTracking);
-        suggestTracking.setOnClickListener(new SuggestTrackingButtonController(this, this));
+//        suggestTracking = (Button) findViewById(R.id.suggestTracking);
+//        suggestTracking.setOnClickListener(new SuggestTrackingButtonController(this, this));
 
         recyclerView = (RecyclerView) findViewById(R.id.rvTrackables);
         recyclerView.setAdapter(adapter);
 
         setUpSpinner();
+
+        suggestTracking = (Button) findViewById(R.id.suggestTracking);
+        suggestTracking.setOnClickListener(new SuggestTrackingButtonController(this, this));
     }
 
     // Set category names in spinner
@@ -95,6 +102,18 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // Show the settings screen
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         mDataSource.open();
@@ -104,16 +123,6 @@ public class DisplayTrackablesListActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mDataSource.close();
-    }
-
-    @Override
-    public void onNewIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        if(extras != null) {
-            if (extras.containsKey("show_dialog")) {
-                Log.i("MyTag", "Boolean " + extras.getString("show_dialog"));
-            }
-        }
     }
 
     public void updateTrackablesDB() {

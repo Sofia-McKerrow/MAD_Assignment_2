@@ -4,22 +4,26 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.List;
 
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.R;
+import au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller.SuggestTrackingButtonController;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.database.DataSource;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.model.BirdTrackable;
 import au.edu.rmit.mckerrow.sofia.mad_assignment_2.service.SuggestTrackingService;
 
 public class TabWidgetActivity extends android.app.TabActivity {
-
-    private DataSource mDataSource;
-    private static List<BirdTrackable> trackableList;
+    private Button suggestTracking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +55,20 @@ public class TabWidgetActivity extends android.app.TabActivity {
         // Set trackables tab to open when app first opens
         tabHost.setCurrentTab(0);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent alarmIntent = new Intent(this, SuggestTrackingService.class);
+        // Get the user specified frequency to display the suggest tracking dialog
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String prefFrequency = preferences.getString("frequency", "");
+        int frequency = Integer.parseInt(prefFrequency);
 
-        PendingIntent pending = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Calendar calendar = Calendar.getInstance();
-        long trigger = calendar.getTimeInMillis() + (30 * 1000);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, pending);
+        if (frequency > 0) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            Intent alarmIntent = new Intent(this, SuggestTrackingService.class);
+
+            PendingIntent pending = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Calendar calendar = Calendar.getInstance();
+            long trigger = calendar.getTimeInMillis() + (frequency * 1000);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, pending);
+        }
     }
 
     @Override
