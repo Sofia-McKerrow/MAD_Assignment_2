@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -50,6 +51,12 @@ public class DisplayTrackingsListActivity extends AppCompatActivity {
 
     public static TrackingAdapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
