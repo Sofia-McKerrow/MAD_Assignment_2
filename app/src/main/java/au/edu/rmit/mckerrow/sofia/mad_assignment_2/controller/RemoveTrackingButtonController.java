@@ -2,6 +2,7 @@ package au.edu.rmit.mckerrow.sofia.mad_assignment_2.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
